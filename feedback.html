@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Brainiac - Feedback</title>
+    <!-- custom css file link -->
+    <link rel="stylesheet" href="feedback.css">
+</head>
+<body>
+    <header class="header">
+        <a href="#home" class="logo"> <img src="Images/LOGO1.png" alt=""> </a>
+    </header>
+    <div class="container">
+        <h2>Weather Brainiac Feedback</h2>
+        <form action="/submit-feedback" method="post">
+            <label for="name">Your Name:</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="email">Your Email:</label>
+            <input type="text" id="email" name="email" required>
+
+            <label for="feedback">Your Feedback:</label>
+            <textarea id="feedback" name="feedback" rows="5" required></textarea>
+
+            <button type="submit">Submit Feedback</button>
+        </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,102 @@
+body
+{
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    background-image: url(./Images/344403.jpg);
+    font-family: 'Arial';
+    
+}
+.login{
+        width: 382px;
+        overflow: hidden;
+        margin: 20px auto;
+        padding: 80px;
+        /*background-image: url(./Images/b.jpg);*/
+        border-radius: 15px ;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+}
+
+.logo-container {
+    text-align: center; /* Centers the logo */
+    /*padding: 20px 0; Adds some space around the logo */
+    
+}
+
+.logo-container img {
+    max-width: 200px;
+    height: auto;
+}
+
+h2{
+    text-align: center;
+    color: var(--black);
+    padding: 20px;
+}
+label{
+    color: #000806;
+    font-size: 17px;
+}
+#Uname{
+    width: 300px;
+    height: 30px;
+    border: none;
+    border-radius: 3px;
+    padding-left: 8px;
+    margin: 15px auto;
+}
+#Pass{
+    width: 300px;
+    height: 30px;
+    border: none;
+    border-radius: 3px;
+    padding-left: 8px;
+    margin: 15px auto;
+
+}
+#log{
+    width: 300px;
+    height: 30px;
+    border: none;
+    border-radius: 17px;
+    padding-left: 7px;
+    color: #000806;
+    background-color: var(--white);
+    cursor: pointer;
+}
+
+#pa{
+    margin-top: 20px;
+    width: 150px;
+    height: 25px;
+    border: none;
+    border-radius: 17px;
+    padding-left: 7px;
+    color: #000806;
+    background-color: var(--white);
+    cursor: pointer;
+    text-align: left;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+
+span{
+    color: #000806;
+    font-size: 17px;
+}
+
+a{
+    float: right;
+    background-color: grey;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+
+

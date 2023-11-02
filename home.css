@@ -1,0 +1,647 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,300;0,400;0,500;0,600;1,100;1,300&display=swap');
+
+*{
+  font-family: 'Poppins', sans-serif;
+  margin:0; padding: 0;
+  box-sizing: border-box;
+  outline: none; border:none;
+  text-decoration: none;
+  text-transform: capitalize;
+  transition: all .2s linear;
+}
+
+:root {
+--pink : #e84393;
+--black: #222;
+--white : #fff;
+--light-bg : #f5f5f5;
+--light-color : #777;
+--border : .2rem solid #222;
+--box-shadow : 0 .5rem 1rem rgba(0,0,0,.1);
+--bg-color: white;
+--text-color: black;
+--nav-color: #f0f0f0;
+}
+
+
+[data-theme="dark"] {
+  --bg-color: #181818;
+  --text-color: #f0f0f0;
+  --nav-color: #333;
+}
+
+body.dark {
+    background-color: #157ebe;
+    color: #eaeaea;
+}
+
+body.dark .navbar a {
+    color: #eaeaea;
+}
+
+body.dark .header {
+    background-color: rgb(3, 48, 90);
+}
+
+body {
+  background-image: url(Images/344403.jpg); /* Adjust the path to your image */
+  background-size: cover;  /* This will cover the entire viewport */
+  background-repeat: no-repeat; /* This will prevent the image from repeating */
+  background-position: center center; /* This will center the image */
+  background-attachment: fixed ;
+}
+
+
+@mixin grid($val) {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax($val, 1fr));
+  gap:2rem;
+}
+
+@keyframes fadeUp {
+  0% {
+    transform: translateY(4rem);
+    opacity: 0;
+  }
+}
+
+html{
+  font-size: 62.5%;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+  scroll-padding-top: 6rem;
+
+  &::-webkit-scrollbar{
+    width: 1rem;
+  }
+
+  &::-webkit-scrollbar-track{
+    background: var(--white);
+  }
+
+  &::-webkit-scrollbar-thumb{
+    background: #777;
+  }
+}
+
+section {
+  padding: 5rem 9%;
+}
+
+.btn {
+  display: inline-block;
+  margin-top: 1rem;
+  border: 1px solid #222;
+  background-color: #fff;
+  padding: 1rem 3rem;
+  font-size: 1.7rem;
+  cursor: pointer;
+  color: #222;
+
+  &:hover {
+    color: var(--white);
+    background: var(--light-color);
+  }
+}
+
+.logo-container {
+    text-align: center; /* Center the logo horizontally */
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+    background: #fff;
+    box-shadow: 0 .5rem 1rem rgba(0,0,0,.1);
+    position: sticky;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 999; /* Keep it below the header */
+}
+
+.header{
+    padding:1.5rem 9%;
+    background-image: url(Images/b.jpg);
+    box-shadow: 0 .5rem 1rem rgba(0,0,0,.1);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    top:0; left:0; right:0;
+    z-index: 1000;
+
+    .logo img{
+      height: 5rem;
+    }
+
+    .search-form{
+        height: 5rem;
+        width: 50rem;
+        border-radius: .5rem;
+        background: #f5f5f5;
+        display: flex;
+        align-items: center;
+        padding:0 1.5rem;
+
+        .input {
+          width: 100%;
+          background: none;
+          font-size: 1.6rem;
+          color:var(--light-color);
+          text-transform: none;
+        }
+    
+        .label{
+          font-size: 2rem;
+          margin-left: .7rem;
+          color:#222;
+          cursor: pointer;
+    
+          &:hover{
+            color:#777;
+          }
+        }
+      }
+
+    .icons a,
+    .icons div{
+        height: 4.5rem;
+        width: 4.5rem;
+        line-height: 4.5rem;
+        text-align: center;
+        background: #f5f5f5;
+        color:#222;
+        cursor: pointer;
+        font-size: 1.8rem;
+        margin-left: .3rem;
+        border-radius: .5rem;
+
+        &:hover{
+        background: #777;
+        color:#fff;
+        }
+    }
+
+    #search-btn{
+        display: none;
+    }
+}
+
+.navbar{
+    position: fixed;
+    top:0; left:-110%;
+    z-index: 1010;
+    height: 100%;
+    width: 100%;
+    background-image: url(/Images/344403.jpg);
+    background-position: center;
+    background-size: cover;
+    display: flex;
+    gap:2rem;
+    justify-content: center;
+    flex-flow: column;
+    align-items: flex-end;
+    padding-right: 15%;
+  
+    &.active{
+      left:0;
+    }
+  
+    #close-navbar{
+      position: absolute;
+      top:3rem; right:3rem;
+      height: 5rem;
+      width: 5rem;
+      line-height: 5rem;
+      text-align: center;
+      /*background-color: #eaeaea;*/
+      color: var(--black);
+      cursor: pointer;
+      font-size: 3rem;
+  
+      /*&:hover{
+        color:var(--white);
+        background: var(--light-color);
+      }*/
+    }
+  
+    .navbar a {
+      font-size: 100px;
+      text-transform:uppercase;
+      color: var(--white);
+      font-weight: lighter;
+  
+      &:hover{
+        color:var(--light-color);
+        letter-spacing: .2rem;
+      }
+    }
+    [data-theme="dark"] & {
+      
+      background: var(--dark-bg); 
+
+      .navbar a {
+          color: var(--white);
+      }
+
+      #close-navbar {
+          color: var(--white);
+
+          &:hover {
+              color: var(--dark-color); 
+          }
+      }
+  }
+  }
+
+  .user-auth {
+    display: flex;
+    gap: 10px; /* Adjust as needed for spacing between login and sign-up links */
+    align-items: center; /* To vertically align the links if there are other items in the header */
+  }
+
+  .login-btn {
+      text-decoration: none;
+      padding: 8px 15px; /* Adjust padding as needed */
+      border-radius: 5px;
+      background-color: #f5f5f5;
+      color: var(--black); /* Use your own color variable or value */
+      transition: background-color 0.3s ease;
+      font-size: 2rem;
+  }
+
+  .login-btn:hover {
+    background: #777;
+    color:#fff;
+      
+  }
+
+
+
+.subheading {
+    padding: 5px 0;
+    text-align: center;
+    font-size: 2rem;
+    width: auto;
+    display: flex;
+    justify-content: space-around; /* Distributes items evenly */
+    flex-wrap: wrap; /* Allows items to wrap onto next line if there's not enough space */
+    border-radius: 10px;
+
+}
+
+.monthlyForecast-btn {
+  display: inline-block;
+  padding: 10px 20px;
+  margin: 5px; /* Adds space around each button */
+  border: 2px solid #030303; /* Border around the button */
+  border-radius: 5px; /* Rounds the corners of the button */
+  text-decoration: none; /* Removes underline from the links */
+  color: #1a14b9; /* Text color */
+  transition: background-color 0.3s; /* Adds a transition effect for hover state */
+}
+
+.feedback-btn {
+  display: inline-block;
+  padding: 10px 20px;
+  margin: 5px; /* Adds space around each button */
+  border: 2px solid #030303; /* Border around the button */
+  border-radius: 5px; /* Rounds the corners of the button */
+  text-decoration: none; /* Removes underline from the links */
+  color: #1a14b9; /* Text color */
+  transition: background-color 0.3s; /* Adds a transition effect for hover state */
+}
+
+.subheading-btn {
+  display: inline-block;
+  padding: 10px 20px;
+  margin: 5px; /* Adds space around each button */
+  border: 2px solid #030303; /* Border around the button */
+  border-radius: 5px; /* Rounds the corners of the button */
+  text-decoration: none; /* Removes underline from the links */
+  color: #1a14b9; /* Text color */
+  transition: background-color 0.3s; /* Adds a transition effect for hover state */
+}
+
+.subheading-btn:hover {
+  background-color: #e0e0e0; /* Changes the background color when hovered */
+}
+
+
+.weather-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 1rem;
+
+}
+
+.weather-container {
+    display: flex;
+    flex-direction: row;
+}
+
+.current-weather{
+  box-sizing: border-box;
+  border: 1px solid #007BFF;
+  border-radius: 4px;
+  /* background-color: #f8f9fa; */
+  text-align: center;
+  font-size: medium;
+  background-color: rgba(255, 255, 255, 0.3); /* Slight white transparency */
+}
+
+.current-weather, .ten-day-forecast {
+    width: auto; /* Adjust this value as needed for spacing */
+    padding: 20px;
+    font-size: medium;
+    border: 1px solid #007BFF;
+    border-radius: 4px;
+    /*background-color: #f8f9fa; */
+    text-align: center;
+    font-size: medium;
+    flex: 1;
+    background-color: rgba(255, 255, 255, 0.3); /* Slight white transparency */
+}
+
+.forecast-container {
+  display: flex;
+  flex-wrap: wrap; 
+  gap: 50px; /* Adjust this value to change the space between each box */
+  padding: 16px;
+  border: 2px solid #007BFF; 
+  border-radius: 8px;
+  background-color: rgba(255, 255, 255, 0.8);
+
+}
+
+.forecast-day {
+  flex: 1 1 calc(14.28% - 1rem); /* This will make each day take up 10% of the container's width, accounting for the 16px gap */
+  box-sizing: border-box;
+  padding: 8px;
+  border: 1px solid #007BFF;
+  border-radius: 4px;
+  background-color: #f8f9fa;
+  text-align: center;
+  font-size: medium;
+  min-width: 100px;
+  margin-right: 1rem;
+  padding: 1rem;
+}
+
+.forecast-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: space-between;
+  overflow-x: auto; /* Horizontal scroll if the content exceeds the container width */
+}
+
+.forecast-day h3 {
+  margin-top: 0; 
+}
+
+.hourly-forecast-section {
+  /* background-color: #f4f4f4; or any color you prefer */
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  background-color: rgba(255, 255, 255, 0.3); /* Slight white transparency */
+  font-size: medium;
+}
+
+.chart-container {
+  max-width: 800px;
+  height: 250px; /* Adjusted height */
+  margin: 0 auto; /* Centering the chart */
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+  padding: 10px;
+}
+
+#hourlyForecastChart {
+  width: 100%;
+  height: 100%;
+  display: block;
+  margin: 0 auto;
+}
+
+.additional-weather-details {
+  background-color: rgba(255, 255, 255, 0.3); /* Slight white transparency */  
+  padding: 20px;
+  margin: 20px 0;
+}
+
+.details-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 columns layout */
+  gap: 20px;
+}
+
+.detail-item {
+  background-color: rgba(255, 255, 255, 0.3); /* Slight white transparency */;
+  padding: 10px;
+  border-radius: 8px;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.detail-item h3 {
+  margin-top: 0;
+  color: #333333;
+  font-size: large;
+}
+
+.detail-item p {
+  margin: 10px 0;
+  font-size: medium;
+  color: #070707;
+}
+
+
+.news-updates {
+  padding: 20px;
+  background-color: rgba(255, 255, 255, 0.3); /* Slight white transparency */
+  border-radius: 5px;
+  margin: 20px 0;
+}
+
+.news-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.news-item {
+  flex: 1;
+  padding: 15px;
+  border: 1px solid #1845e7; /* Light grey border */
+  border-radius: 5px;
+}
+
+.news-date {
+  display: block;
+  margin-top: 10px;
+  font-size: 16px;
+  color: #888; /* Dark grey color for the date */
+}
+
+
+
+  
+
+  
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  /* media queries */
+@media (max-width:991px) {
+
+  html {
+    font-size: 55%;
+  }
+
+  .header {
+    padding: 1.5rem 2rem;
+  }
+
+}
+
+@media (max-width:768px) {
+
+  .header {
+    #search-btn{
+      display: inline-block;
+      width: auto;
+    }
+
+    .search-form{
+      position: absolute;
+      top: 99%;
+      left: 0;
+      border-top: var(--border);
+      border-bottom: var(--border);
+      width: 100%;
+      background: white;
+      height: 6rem;
+      display: none;
+      animation: fadeUp .2s linear backwards;
+
+      &.active{
+        display: flex;
+      }
+    }
+  }
+  
+}
+
+@media (max-width:450px) {
+
+  html {
+    font-size: 50%;
+  }
+  
+}
+
+@media (max-width: 768px) { /* Example breakpoint for tablets */
+  .current-weather,
+  .ten-day-forecast {
+      flex: 100%; /* Take full width */
+  }
+}
+
+@media (max-width: 768px) {  /* You can adjust this value based on your design requirements */
+  .details-grid {
+    grid-template-columns: 1fr; /* Change to a single column layout */
+  }
+}
