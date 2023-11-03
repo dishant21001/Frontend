@@ -15,6 +15,9 @@
 
         <!-- custom css file link  -->
         <link rel="stylesheet" href="home.css">
+        
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+
     </head>
 </html>
 
@@ -30,6 +33,7 @@
             <input type="search" name="" placeholder="search location ..." id="search-box">
             <label for="search-box" class="fas fa-search"></label>
         </form>
+        
         
 
         <a href="login.html" class="login-btn">Login</a>
@@ -47,7 +51,7 @@
     <section class="subheading">
         <a href="#home" class="subheading-btn">home</a>
         <a href="#weather" class="subheading-btn">weather</a>
-        <a href="#maps" class="subheading-btn">maps</a>
+        <a href="maps.html" class="maps-btn">maps</a>
         <a href="#hourly forecast" class="subheading-btn">hourly forecast</a>
         <a href="monthly.html" class="monthlyForecast-btn">monthlyForecast</a>
         <a href="feedback.html" class="feedback-btn">feedback</a>
@@ -59,7 +63,7 @@
         <div id="close-navbar" class="fas fa-times"></div>
         <a href="#home">home</a>
         <a href="#weather">weather</a>
-        <a href="#maps">maps</a>
+        <a href="maps.html" class="maps-btn">maps</a>
         <a href="#hourly forecast">hourly forecast</a>
         <a href="monthly.html" class="monthlyForecast-btn">monthlyForecast</a>
         <a href="feedback.html" class="feedback-btn">feedback</a>
@@ -83,9 +87,14 @@
             <div class="weather-info">
                 <!-- Place all the relevant information about the current weather here. 
                     For example, temperature, condition, humidity, etc. -->
-                <p><strong>Temperature:</strong> 25°C</p>
+                <!-- <p><strong>Temperature:</strong> 25°C</p>
                 <p><strong>Condition:</strong> Sunny</p>
-                <p><strong>Humidity:</strong> 60%</p>
+                <p><strong>Humidity:</strong> 60%</p> -->
+                <p><strong>Location:</strong> <span id="weather-location">N/A</span></p>
+                <p><strong>Temperature:</strong> <span id="weather-temperature">N/A</span>°C</p>
+                <p><strong>Condition:</strong> <span id="weather-condition">N/A</span></p>
+                <p><strong>Humidity:</strong> <span id="weather-humidity">N/A</span>%</p>
+                <p><strong>Wind Speed:</strong> <span id="weather-wind">N/A</span> km/h</p>
             </div>
         </section>
 
@@ -168,28 +177,28 @@
         <div class="details-grid">
             <div class="detail-item">
                 <h3>Wind</h3>
-                <p>15 km/h NE</p>
+                <p id="detail-wind">Loading...</p>
             </div>
             <div class="detail-item">
                 <h3>Humidity</h3>
-                <p>60%</p>
+                <p id="detail-humidity">--</p>
             </div>
             <div class="detail-item">
                 <h3>Sunrise & Sunset</h3>
-                <p>Sunrise: 06:30 AM</p>
-                <p>Sunset: 07:45 PM</p>
+                <p id="detail-sunrise">--</p>
+                <p id="detail-sunset">--</p>
             </div>
             <div class="detail-item">
                 <h3>Feels Like</h3>
-                <p>23°C</p>
+                <p id="detail-feelslike">--</p>
             </div>
             <div class="detail-item">
                 <h3>Precipitation</h3>
-                <p>10%</p>
+                <p id="detail-precipitation">--</p>
             </div>
             <div class="detail-item">
                 <h3>Visibility</h3>
-                <p>10 km</p>
+                <p id="detail-visibility">--</p>
             </div>
         </div>
     </section>
@@ -214,12 +223,65 @@
             <!-- Add more news items as needed -->
         </div>
     </section>
+
+
     <!-- News and Updates Section Ends -->
 
+    <!-- Maps section Starts -->
+
+    <div id="mapid" style="width: 2000px; height: 300px;"></div>
+
+    <!-- Maps section Ends -->
 
 
+    <!-- Footer Section Starts -->
+    <!-- Footer Section Starts -->
+<footer class="footer">
+    <div class="footer-content">
+        <div class="footer-section">
+            <a href="#home" class="logo">
+                <img src="Images/LOGO1.png" alt="Weather Brainiac Logo">
+            </a>
+            <p class="footer-text">Providing accurate weather forecasts for over a decade.</p>
+        </div>
+        <div class="footer-section">
+            <h3>Quick Links</h3>
+            <ul class="footer-links">
+                <li><a href="#about">About Us</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#gallery">Gallery</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><a href="#faq">FAQ</a></li>
+            </ul>
+        </div>
+        <div class="footer-section">
+            <h3>Follow Us</h3>
+            <div class="social-icons">
+                <a href="#" class="fab fa-facebook-f"></a>
+                <a href="#" class="fab fa-twitter"></a>
+                <a href="#" class="fab fa-instagram"></a>
+                <a href="#" class="fab fa-linkedin-in"></a>
+            </div>
+            <div class="footer-section contact-form">
+                <h3>Contact us</h3>
+                <form action="#">
+                    <input type="email" name="email" placeholder="Your email address" required>
+                    <textarea rows="4" placeholder="Your message"></textarea>
+                    <button type="submit" class="btn">Send</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        © 2023 Weather Brainiac. All rights reserved.
+    </div>
+</footer>
+<!-- Footer Section Ends -->
+
+<!-- Footer Section Ends -->
 
 
+      
 
 
 
@@ -239,6 +301,9 @@
 
 
     
+
+    
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
     <!-- Swiper CSS -->
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
 

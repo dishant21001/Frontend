@@ -288,6 +288,17 @@ section {
 
 }
 
+.maps-btn {
+  display: inline-block;
+  padding: 10px 20px;
+  margin: 5px; /* Adds space around each button */
+  border: 2px solid #030303; /* Border around the button */
+  border-radius: 5px; /* Rounds the corners of the button */
+  text-decoration: none; /* Removes underline from the links */
+  color: #1a14b9; /* Text color */
+  transition: background-color 0.3s; /* Adds a transition effect for hover state */
+}
+
 .monthlyForecast-btn {
   display: inline-block;
   padding: 10px 20px;
@@ -487,9 +498,149 @@ section {
 
 
 
-  
+.weather-image {
+  text-align: center; /* Centers the image */
+  padding: 20px; /* Adds some padding around the image */
+}
 
-  
+.weather-image img {
+  max-width: auto; /* Set a max-width to the image */
+  height: auto; /* Keep the aspect ratio */
+}
+
+
+
+.footer {
+  background-color: #2B2D30; /* Darker grey for elegance */
+  color: #FFFFFF; /* White color for text */
+  padding: 40px 10%; /* Spacious padding with 10% horizontal padding for responsiveness */
+  font-family: 'Arial', sans-serif; /* Simple and readable font */
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-between; /* Even spacing between sections */
+  flex-wrap: wrap;
+}
+
+.footer-section {
+  flex: 1; /* Evenly distribute space amongst sections */
+  min-width: 200px; /* Set a minimum width for each section */
+  margin: 0 20px; /* Spacing between sections */
+}
+
+.logo {
+  display: flex;
+  align-items: center; /* Vertically center logo and text */
+}
+
+.logo img {
+  max-width: 200px; /* Reduced logo size */
+  margin-right: 10px; /* Space between logo and text */
+}
+
+.footer-text {
+  font-size: 14px; /* Smaller text for the description */
+  opacity: 0.8; /* Slightly translucent for subtleness */
+}
+
+.footer h3 {
+  font-size: 16px; /* A bit larger than normal text */
+  margin-bottom: 15px; /* Space between title and links */
+  border-bottom: 2px solid #4CAF50; /* Green underline for emphasis */
+  display: inline-block; /* Keeps the border close to the text */
+}
+
+.footer-links {
+  list-style-type: none;
+  padding: 0;
+}
+
+.footer-links li a {
+  color: #FFFFFF; /* White color for links */
+  text-decoration: none;
+  display: block;
+  margin: 7px 0; /* Space between links */
+  font-size: 14px; /* Consistent font size */
+  opacity: 0.8; /* Translucency for a softer look */
+}
+
+.footer-links li a:hover {
+  color: #4CAF50; /* Green color on hover for a pop of color */
+  opacity: 1; /* Fully opaque on hover */
+}
+
+.social-icons {
+  display: flex; /* Make icons line up horizontally */
+  gap: 15px; /* Consistent gap between icons */
+  margin-bottom: 25px; /* Margin to separate from the next section */
+}
+
+.social-icons a {
+  color: #FFFFFF; /* White icons */
+  margin: 0 10px; /* Space between icons */
+  font-size: 20px; /* Slightly larger icons for visibility */
+  opacity: 0.8; /* Same translucency for consistency */
+}
+
+.social-icons a:hover {
+  color: #4CAF50; /* Green on hover */
+  opacity: 1;
+}
+
+.footer-bottom {
+  text-align: center;
+  margin-top: 40px; /* More space before this section */
+  font-size: 12px; /* Smaller font for less emphasis */
+  opacity: 0.7; /* More translucency for subtlety */
+}
+
+@media (max-width: 768px) {
+  .footer-content {
+      flex-direction: column;
+      align-items: center; /* Centered on mobile */
+  }
+
+  .footer-section {
+      margin: 20px 0; /* Vertical spacing on mobile */
+  }
+}
+
+
+
+.contact-form input,
+.contact-form textarea,
+.contact-form button {
+    width: 100%; /* Take the full width */
+    padding: 10px; /* Comfortable padding for typing */
+    margin-bottom: 10px; /* Spacing between elements */
+    border: 2px solid #E0E0E0; /* Border color */
+    font-size: 16px; /* Readable font size */
+    transition: border-color 0.3s; /* Smooth transition for focus */
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+    border-color: #4CAF50; /* Green border on focus */
+    outline: none; /* Remove default browser outline */
+}
+
+.contact-form button {
+    background-color: #4CAF50; /* Green background */
+    color: #FFFFFF; /* White text */
+    border: none; /* Remove default border */
+    cursor: pointer; /* Hand cursor for interactivity */
+    transition: background-color 0.3s; /* Smooth transition for hover */
+}
+
+.contact-form button:hover {
+    background-color: #388E3C; /* Darker green on hover */
+}
+Th
+
+
+
+
 
   
 

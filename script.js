@@ -101,23 +101,202 @@ new Swiper('.forecast-grid', {
 });
 
 
+// script.js
+
+// Function to fetch current weather
+function fetchCurrentWeather(location) {
+  const apiKey = '2c4fe195f69547fda56145444230211';
+  const url = `http://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${location}&aqi=no`;
+
+  fetch(url)
+    .then(response => response.json())
+    .then(data => {
+      if (data && data.current) {
+        document.getElementById('weather-location').textContent = location;
+        document.getElementById('weather-temperature').textContent = data.current.temp_c;
+        document.getElementById('weather-condition').textContent = data.current.condition.text;
+        document.getElementById('weather-humidity').textContent = data.current.humidity;
+        document.getElementById('weather-wind').textContent = data.current.wind_kph;
+      }
+    })
+    .catch(error => {
+      console.error('Error fetching current weather data:', error);
+    });
+}
+
+// Function to fetch forecast
+function fetchForecast(location) {
+  const apiKey = '2c4fe195f69547fda56145444230211';
+  const url = `http://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${location}&days=7&aqi=no&alerts=no`;
+
+  fetch(url)
+    .then(response => response.json())
+    .then(data => {
+      if (data && data.forecast) {
+        // Update the forecast section with the data
+        // You would loop through the forecast data and create HTML elements for each day
+      }
+    })
+    .catch(error => {
+      console.error('Error fetching forecast data:', error);
+    });
+}
+
+
+
+// Initial call to fetch weather for a default location
+fetchCurrentWeather('Dallas');
+fetchForecast('Dallas');
 
 
 
 
 
 
+// Function to update the weather details
+function updateWeatherDetails(location) {
+  const apiKey = '2c4fe195f69547fda56145444230211';
+  const url = `http://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${location}&aqi=no`;
+
+  fetch(url)
+      .then(response => {
+          if (!response.ok) {
+              throw new Error(`HTTP error! status: ${response.status}`);
+          }
+          return response.json();
+      })
+      .then(data => {
+          // Now, we have the data, let's update the DOM
+          document.getElementById('detail-wind').textContent = `${data.current.wind_kph} km/h ${data.current.wind_dir}`;
+          document.getElementById('detail-humidity').textContent = `${data.current.humidity}%`;
+          document.getElementById('detail-precipitation').textContent = `${data.current.precip_mm} mm`;
+          document.getElementById('detail-feelslike').textContent = `${data.current.feelslike_c}°C`;
+          document.getElementById('detail-visibility').textContent = `${data.current.vis_km} km`;
+      })
+      .catch(error => {
+          console.error('There has been a problem with your fetch operation:', error);
+      });
+}
+
+// Assuming you want to call this function when the page loads,
+// or when a new location is searched for:
+updateWeatherDetails('Dallas'); // Replace with your default location or a search term
 
 
 
 
 
+// Function to fetch and display the current weather
+function fetchCurrentWeather(location) {
+  const apiKey = '2c4fe195f69547fda56145444230211';
+  const url = `http://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${location}&aqi=no`;
+
+  fetch(url)
+    .then(response => response.json())
+    .then(data => {
+      // Assuming you have an element with ID 'weather-location' and others for temperature, condition, etc.
+      document.getElementById('weather-location').textContent = data.location.name;
+      document.getElementById('weather-temperature').textContent = data.current.temp_c;
+      document.getElementById('weather-condition').textContent = data.current.condition.text;
+      document.getElementById('weather-humidity').textContent = data.current.humidity;
+      document.getElementById('weather-wind').textContent = data.current.wind_kph;
+    })
+    .catch(error => {
+      console.error('Error fetching the weather data: ', error);
+    });
+}
+
+// Function to fetch and display the 7-day forecast
+function fetch7DayForecast(location) {
+  const apiKey = '2c4fe195f69547fda56145444230211';
+  const url = `http://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${location}&days=7&aqi=no&alerts=no`;
+
+  fetch(url)
+    .then(response => response.json())
+    .then(data => {
+      const forecastGrid = document.querySelector('.forecast-grid');
+      forecastGrid.innerHTML = ''; // Clear any existing content
+
+      data.forecast.forecastday.forEach(day => {
+        const forecastDayElem = document.createElement('div');
+        forecastDayElem.className = 'forecast-day';
+        forecastDayElem.innerHTML = `
+          <h3>${new Date(day.date).toLocaleDateString('en-US', { weekday: 'long' })}</h3>
+          <p>High: ${day.day.maxtemp_c}°C</p>
+          <p>Low: ${day.day.mintemp_c}°C</p>
+          <p>Condition: ${day.day.condition.text}</p>
+        `;
+        forecastGrid.appendChild(forecastDayElem);
+      });
+    })
+    .catch(error => {
+      console.error('Error fetching the forecast data: ', error);
+    });
+}
+
+// Example calls with a default location
+fetchCurrentWeather('Dallas');
+fetch7DayForecast('Dallas');
+
+// You would also want to call these functions whenever the search box is used
+document.querySelector('#search-box').addEventListener('keypress', function(e) {
+  if (e.key === 'Enter') {
+    fetchCurrentWeather(this.value);
+    fetch7DayForecast(this.value);
+  }
+});
 
 
 
-  
+const apiKey = '2c4fe195f69547fda56145444230211';
+let mymap = L.map('mapid').setView([37.8, -96], 4); // Adjust the view to center on the US
 
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    attribution: '© OpenStreetMap contributors'
+}).addTo(mymap);
 
+let markerGroup = L.layerGroup().addTo(mymap);
+
+// List of major cities in the USA
+const cities = [
+  'New York', 'Los Angeles', 'Chicago', 'Houston', 'Phoenix',
+  'Philadelphia', 'San Antonio', 'San Diego', 'Dallas', 'San Jose',
+  'Austin', 'Jacksonville', 'San Francisco', 'Columbus', 'Charlotte',
+  'Indianapolis', 'Seattle', 'Denver', 'Washington', 'Boston',
+  'El Paso', 'Nashville', 'Detroit', 'Oklahoma City', 'Portland',
+  'Las Vegas', 'Memphis', 'Louisville', 'Baltimore', 'Milwaukee',
+  'Albuquerque', 'Tucson', 'Fresno', 'Sacramento', 'Kansas City',
+  'Atlanta', 'Miami', 'Colorado Springs', 'Raleigh', 'Omaha',
+  'Long Beach', 'Virginia Beach', 'Oakland', 'Minneapolis', 'Tulsa',
+  'Arlington', 'New Orleans', 'Wichita', 'Dallas' // ... more cities if needed
+];
+
+// Function to update the weather data and place markers on the map
+function updateWeatherForUSACities() {
+  cities.forEach(city => {
+    const url = `http://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${city}&aqi=no`;
+
+    fetch(url)
+      .then(response => response.json())
+      .then(data => {
+        // Create a marker for the city and add it to the map
+        const marker = L.marker([data.location.lat, data.location.lon]).addTo(markerGroup);
+
+        // Create a popup with the current temperature
+        marker.bindPopup(`<b>${city}</b><br>Temperature: ${data.current.temp_c}°C`).openPopup();
+      })
+      .catch(error => {
+        console.error(`Error fetching data for ${city}:`, error);
+      });
+  });
+}
+
+// Initial update
+updateWeatherForUSACities();
+
+// Update weather every 30 minutes
+setInterval(updateWeatherForUSACities, 1800000);
 
 
 
