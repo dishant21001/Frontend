@@ -48,7 +48,7 @@ function fillMonthlyForecast(month, year) {
 function populateCalendar() {
     const month = document.getElementById("monthSelect").value;
     const year = document.getElementById("yearSelect").value;
-
+    
     fillMonthlyForecast(Number(month), Number(year));
 }
 
@@ -68,5 +68,27 @@ window.onload = function() {
     populateCalendar();
 }
 
+
+
+function fetchMonthlyWeatherData(month, year, callback) {
+    const apiKey = '2c4fe195f69547fda56145444230211'; // Replace with your API key
+    const url = `http://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=YOUR_LOCATION&dt=${year}-${month}-01&days=30`; // Adjust the query parameters as needed
+
+    fetch(url)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(data => {
+            // Assuming the API returns an array of weather data for the month
+            callback(data.forecast.forecastday);
+        })
+        .catch(e => {
+            console.log(e);
+            alert("Error fetching weather data");
+        });
+}
 
 

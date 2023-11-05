@@ -29,12 +29,11 @@
 
         <a href="#home" class="logo"> <img src="Images/LOGO1.png" alt=""> </a>
     
-        <form action="" class="search-form">
+        <form action="" class="search-form" onsubmit="event.preventDefault(); fetchWeatherData(document.getElementById('search-box').value);">
             <input type="search" name="" placeholder="search location ..." id="search-box">
             <label for="search-box" class="fas fa-search"></label>
         </form>
-        
-        
+
 
         <a href="login.html" class="login-btn">Login</a>
     
@@ -45,6 +44,7 @@
             <div id="dark-mode-toggle" class="fas fa-moon"></div>
 
         </div>
+
     
     </header>
 
@@ -103,7 +103,7 @@
         <!-- 10 day Forecast Starts-->
 
         <div class = "forecast-contanier">
-            <section class="ten-day-forecast">
+            <section class="seven-day-forecast">
                 <h2>7-day Forecast</h2>
                 <div class="forecast-grid">
                     <div class="swiper-wrapper">
@@ -185,8 +185,8 @@
             </div>
             <div class="detail-item">
                 <h3>Sunrise & Sunset</h3>
-                <p id="detail-sunrise">--</p>
-                <p id="detail-sunset">--</p>
+                <p>Sunrise: <span id="weather-sunrise">--:--</span></p>
+                <p>Sunset: <span id="weather-sunset">--:--</span></p>
             </div>
             <div class="detail-item">
                 <h3>Feels Like</h3>
@@ -229,9 +229,13 @@
 
     <!-- Maps section Starts -->
 
-    <div id="mapid" style="width: 2000px; height: 300px;"></div>
+    <div class="map-container">
+        <h2>Maps</h2>
+        <div id="mapid" style="width: 950px; height: 300px;"></div>
+    </div>
 
     <!-- Maps section Ends -->
+    
 
 
     <!-- Footer Section Starts -->

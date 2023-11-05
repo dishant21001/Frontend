@@ -299,6 +299,10 @@ section {
   transition: background-color 0.3s; /* Adds a transition effect for hover state */
 }
 
+.maps-btn:hover {
+  background-color: #e0e0e0; /* Changes the background color when hovered */
+}
+
 .monthlyForecast-btn {
   display: inline-block;
   padding: 10px 20px;
@@ -310,6 +314,10 @@ section {
   transition: background-color 0.3s; /* Adds a transition effect for hover state */
 }
 
+.monthlyForecast-btn:hover {
+  background-color: #e0e0e0; /* Changes the background color when hovered */
+}
+
 .feedback-btn {
   display: inline-block;
   padding: 10px 20px;
@@ -319,6 +327,10 @@ section {
   text-decoration: none; /* Removes underline from the links */
   color: #1a14b9; /* Text color */
   transition: background-color 0.3s; /* Adds a transition effect for hover state */
+}
+
+.feedback-btn:hover {
+  background-color: #e0e0e0; /* Changes the background color when hovered */
 }
 
 .subheading-btn {
@@ -360,7 +372,7 @@ section {
   background-color: rgba(255, 255, 255, 0.3); /* Slight white transparency */
 }
 
-.current-weather, .ten-day-forecast {
+.current-weather, .seven-day-forecast {
     width: auto; /* Adjust this value as needed for spacing */
     padding: 20px;
     font-size: medium;
@@ -411,9 +423,12 @@ section {
 }
 
 .hourly-forecast-section {
+  margin-left: 110px;
+  margin-right: 110px;
   /* background-color: #f4f4f4; or any color you prefer */
   padding: 20px;
   border-radius: 5px;
+  border: 1px solid #007BFF;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
   background-color: rgba(255, 255, 255, 0.3); /* Slight white transparency */
   font-size: medium;
@@ -437,9 +452,13 @@ section {
 }
 
 .additional-weather-details {
+  border-radius: 5px;
+  border: 1px solid #007BFF;
   background-color: rgba(255, 255, 255, 0.3); /* Slight white transparency */  
   padding: 20px;
-  margin: 20px 0;
+  margin-top: 50px;
+  margin-left: 110px;
+  margin-right: 110px;
 }
 
 .details-grid {
@@ -470,10 +489,15 @@ section {
 
 
 .news-updates {
+
   padding: 20px;
   background-color: rgba(255, 255, 255, 0.3); /* Slight white transparency */
   border-radius: 5px;
-  margin: 20px 0;
+  border: 1px solid #007BFF;
+  margin-left: 110px;
+  margin-right: 110px;
+  margin-top: 50px;
+  margin-bottom: 50px;
 }
 
 .news-container {
@@ -511,6 +535,7 @@ section {
 
 
 .footer {
+  margin-top: 10px;
   background-color: #2B2D30; /* Darker grey for elegance */
   color: #FFFFFF; /* White color for text */
   padding: 40px 10%; /* Spacious padding with 10% horizontal padding for responsiveness */
@@ -636,9 +661,25 @@ section {
 .contact-form button:hover {
     background-color: #388E3C; /* Darker green on hover */
 }
-Th
 
 
+
+
+.map-container {
+  padding: 20px;
+  background-color: rgba(255, 255, 255, 0.3); /* Slight white transparency */
+  border-radius: 5px;
+  border: 1px solid #007BFF;
+  margin-left: 110px;
+  margin-right: 110px;
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+
+.map-title {
+    text-align: center;
+    /* Add more styles for your title as needed */
+}
 
 
 

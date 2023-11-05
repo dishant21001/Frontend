@@ -60,10 +60,11 @@ document.addEventListener("DOMContentLoaded", function() {
   var chart = new Chart(ctx, {
       type: 'line',
       data: {
-          labels: ["08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00"], // The hours
+          labels: ["00:00", "1:00", "2:00", "3:00", "4:00", "5:00", "6:00", "7:00", "08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00",
+                   "17:00", "18:00", "19:00", "20:00", "21:00", "22:00", "23:00"], // The hours
           datasets: [{
               label: 'Temperature (°C)',
-              data: [20, 21, 22, 23, 24, 25, 24, 23, 22, 21, 20, 19], // Your temperature data
+              data: [], // Initialize empty data array
               backgroundColor: 'rgba(255, 99, 132, 0.2)',
               borderColor: 'rgba(255, 99, 132, 1)',
               borderWidth: 1
@@ -71,15 +72,52 @@ document.addEventListener("DOMContentLoaded", function() {
       },
       options: {
         responsive: true,
-        maintainAspectRatio: false, // This ensures the graph will stretch in both width and height to fit its container
+        maintainAspectRatio: false,
         scales: {
             y: {
                 beginAtZero: true
             }
         }
-    }
+      }
   });
+
+  const apiKey = '2c4fe195f69547fda56145444230211';
+
+  // Function to fetch data and update the chart
+  function fetchDataAndUpdateChart() {
+    // Fetching data for a specific location
+    fetchLatestData('Dallas') // Pass your desired location here
+      .then(newData => {
+        chart.data.datasets[0].data = newData;
+        chart.update();
+      }).catch(error => {
+        console.error("Error fetching data: ", error);
+      });
+  }
+
+  // Function to simulate fetching data - replace with actual data fetching logic
+  async function fetchLatestData(location) {
+    const url = `http://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${location}&hours=24`;
+
+    try {
+      const response = await fetch(url);
+      const data = await response.json();
+      const forecastData = data.forecast.forecastday[0].hour.map(hour => hour.temp_c);
+      return forecastData;
+    } catch (error) {
+      console.error("Error fetching real-time data: ", error);
+      throw error; // Rethrow the error to be caught by the calling function
+    }
+  }
+
+  // Initial fetch
+  fetchDataAndUpdateChart();
+
+  // Set interval to fetch data every 60000 milliseconds (1 minute)
+  setInterval(fetchDataAndUpdateChart, 60000);
 });
+
+
 
 new Swiper('.forecast-grid', {
   slidesPerView: 4, // Default is 4 slides per view
@@ -186,26 +224,6 @@ updateWeatherDetails('Dallas'); // Replace with your default location or a searc
 
 
 
-// Function to fetch and display the current weather
-function fetchCurrentWeather(location) {
-  const apiKey = '2c4fe195f69547fda56145444230211';
-  const url = `http://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${location}&aqi=no`;
-
-  fetch(url)
-    .then(response => response.json())
-    .then(data => {
-      // Assuming you have an element with ID 'weather-location' and others for temperature, condition, etc.
-      document.getElementById('weather-location').textContent = data.location.name;
-      document.getElementById('weather-temperature').textContent = data.current.temp_c;
-      document.getElementById('weather-condition').textContent = data.current.condition.text;
-      document.getElementById('weather-humidity').textContent = data.current.humidity;
-      document.getElementById('weather-wind').textContent = data.current.wind_kph;
-    })
-    .catch(error => {
-      console.error('Error fetching the weather data: ', error);
-    });
-}
-
 // Function to fetch and display the 7-day forecast
 function fetch7DayForecast(location) {
   const apiKey = '2c4fe195f69547fda56145444230211';
@@ -297,6 +315,104 @@ updateWeatherForUSACities();
 
 // Update weather every 30 minutes
 setInterval(updateWeatherForUSACities, 1800000);
+
+
+
+
+
+// Function to fetch weather data
+async function fetchWeatherData(location) {
+  const url = `http://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${location}&days=7&aqi=no&alerts=no`;
+  try {
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error('Weather data could not be retrieved for that location.');
+    }
+    const data = await response.json();
+    updateWeatherData(data);
+  } catch (error) {
+    alert(error.message);
+  }
+}
+
+// Function to update HTML elements with new weather data
+function updateWeatherData(data) {
+  const today = data.forecast.forecastday[0]; // Assuming you want the current day's data
+  
+  document.getElementById('weather-location').textContent = data.location.name;
+  document.getElementById('weather-temperature').textContent = `${data.current.temp_c}`;
+  document.getElementById('weather-condition').textContent = data.current.condition.text;
+  document.getElementById('weather-humidity').textContent = `${data.current.humidity}%`;
+  document.getElementById('weather-wind').textContent = `${data.current.wind_kph} kph`;
+   const sunrise = today.astro.sunrise; // Extract sunrise time for the current day
+  const sunset = today.astro.sunset;   // Extract sunset time for the current day
+  document.getElementById('weather-sunrise').textContent = sunrise;
+  document.getElementById('weather-sunset').textContent = sunset;
+  // ...Update other elements as needed
+}
+
+// Event listener for the search form submission
+document.querySelector('.search-form').addEventListener('submit', function(event) {
+  event.preventDefault();
+  const searchBox = document.getElementById('search-box');
+  const location = searchBox.value.trim();
+  if (location) {
+    fetchWeatherData(location);
+  } else {
+    alert('Please enter a location to search.');
+  }
+});
+
+
+
+
+
+// Function to fetch and display the sunrise and sunset times
+function displaySunriseSunset() {
+  // API Key should ideally not be hardcoded in production, but for the sake of this example, we'll include it here
+  const apiKey = '2c4fe195f69547fda56145444230211';
+
+  // Function to get the current date in YYYY-MM-DD format
+  function getCurrentDate() {
+    const today = new Date();
+    const yyyy = today.getFullYear();
+    const mm = String(today.getMonth() + 1).padStart(2, '0');
+    const dd = String(today.getDate()).padStart(2, '0');
+    return `${yyyy}-${mm}-${dd}`;
+  }
+
+  // Define the location for which you want the weather details
+  const location = 'dallas'; // Replace with the location you want
+
+  // Create the URL for the API request
+  const url = `http://api.weatherapi.com/v1/astronomy.json?key=${apiKey}&q=${location}&dt=${getCurrentDate()}`;
+
+  // Fetch data from the weather API
+  fetch(url)
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok ' + response.statusText);
+      }
+      return response.json();
+    })
+    .then(data => {
+      // Extract the sunrise and sunset times from the API response
+      const sunrise = data.astronomy.astro.sunrise;
+      const sunset = data.astronomy.astro.sunset;
+
+      // Update the HTML elements with the sunrise and sunset times
+      document.getElementById('weather-sunrise').textContent = sunrise;
+      document.getElementById('weather-sunset').textContent = sunset;
+    })
+    .catch(error => {
+      console.error('Failed to fetch sunrise and sunset data: ', error);
+      // Here you could update the HTML to show an error message if desired
+    });
+}
+
+// Call the function to update the sunrise and sunset times
+displaySunriseSunset();
+
 
 
 
