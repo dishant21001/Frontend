@@ -84,7 +84,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
   // Function to simulate fetching data - replace with actual data fetching logic
   async function fetchLatestData(location) {
-    const url = `http://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${location}&hours=24`;
+    const url = `https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${location}&hours=24`;
 
     try {
       const response = await fetch(url);
@@ -141,7 +141,7 @@ new Swiper('.forecast-grid', {
 // Function to fetch current weather
 function fetchCurrentWeather(location) {
   const apiKey = '2c4fe195f69547fda56145444230211';
-  const url = `http://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${location}&aqi=no`;
+  const url = `https://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${location}&aqi=no`;
 
   fetch(url)
     .then(response => response.json())
@@ -162,7 +162,7 @@ function fetchCurrentWeather(location) {
 // Function to fetch forecast
 function fetchForecast(location) {
   const apiKey = '2c4fe195f69547fda56145444230211';
-  const url = `http://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${location}&days=7&aqi=no&alerts=no`;
+  const url = `https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${location}&days=7&aqi=no&alerts=no`;
 
   fetch(url)
     .then(response => response.json())
@@ -191,7 +191,7 @@ fetchForecast('Dallas');
 // Function to update the weather details
 function updateWeatherDetails(location) {
   const apiKey = '2c4fe195f69547fda56145444230211';
-  const url = `http://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${location}&aqi=no`;
+  const url = `https://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${location}&aqi=no`;
 
   fetch(url)
       .then(response => {
@@ -224,7 +224,7 @@ updateWeatherDetails('Dallas'); // Replace with your default location or a searc
 // Function to fetch and display the 7-day forecast
 function fetch7DayForecast(location) {
   const apiKey = '2c4fe195f69547fda56145444230211';
-  const url = `http://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${location}&days=7&aqi=no&alerts=no`;
+  const url = `https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${location}&days=7&aqi=no&alerts=no`;
 
   fetch(url)
     .then(response => response.json())
@@ -290,7 +290,7 @@ const cities = [
 // Function to update the weather data and place markers on the map
 function updateWeatherForUSACities() {
   cities.forEach(city => {
-    const url = `http://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${city}&aqi=no`;
+    const url = `https://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${city}&aqi=no`;
 
     fetch(url)
       .then(response => response.json())
@@ -319,7 +319,7 @@ setInterval(updateWeatherForUSACities, 1800000);
 
 // Function to fetch weather data
 async function fetchWeatherData(location) {
-  const url = `http://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${location}&days=7&aqi=no&alerts=no`;
+  const url = `https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${location}&days=7&aqi=no&alerts=no`;
   try {
     const response = await fetch(url);
     if (!response.ok) {
@@ -382,7 +382,7 @@ function displaySunriseSunset() {
   const location = 'dallas'; // Replace with the location you want
 
   // Create the URL for the API request
-  const url = `http://api.weatherapi.com/v1/astronomy.json?key=${apiKey}&q=${location}&dt=${getCurrentDate()}`;
+  const url = `https://api.weatherapi.com/v1/astronomy.json?key=${apiKey}&q=${location}&dt=${getCurrentDate()}`;
 
   // Fetch data from the weather API
   fetch(url)
