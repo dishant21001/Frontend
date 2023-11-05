@@ -84,9 +84,9 @@ document.addEventListener("DOMContentLoaded", function() {
   const apiKey = '2c4fe195f69547fda56145444230211';
 
   // Function to fetch data and update the chart
-  function fetchDataAndUpdateChart() {
+  function fetchDataAndUpdateChart(location = 'Dallas') {
     // Fetching data for a specific location
-    fetchLatestData('Dallas') // Pass your desired location here
+    fetchLatestData(location) // Pass your desired location here
       .then(newData => {
         chart.data.datasets[0].data = newData;
         chart.update();
@@ -110,11 +110,21 @@ document.addEventListener("DOMContentLoaded", function() {
     }
   }
 
+  document.querySelector('#search-box').addEventListener('keypress', function(e) {
+    if (e.key === 'Enter') {
+      const location = this.value.trim();
+      fetchDataAndUpdateChart(location);
+      fetch7DayForecast(location);
+      fetchCurrentWeather(location);
+    }
+  });
+  
+
   // Initial fetch
   fetchDataAndUpdateChart();
 
   // Set interval to fetch data every 60000 milliseconds (1 minute)
-  setInterval(fetchDataAndUpdateChart, 60000);
+  setInterval(fetchDataAndUpdateChart(), 60000);
 });
 
 
@@ -413,6 +423,43 @@ function displaySunriseSunset() {
 // Call the function to update the sunrise and sunset times
 displaySunriseSunset();
 
+
+
+// Wait for the DOM to be loaded
+document.addEventListener('DOMContentLoaded', function() {
+  var heartIcon = document.querySelector('.fa-heart');
+  var savedLocations = JSON.parse(localStorage.getItem('savedLocations')) || [];
+
+  // Update the icon based on whether the location is already saved
+  updateHeartIcon();
+
+  heartIcon.addEventListener('click', function() {
+      var location = document.getElementById('weather-location').textContent;
+
+      // Check if the location is already saved
+      if (heartIcon.classList.contains('active')) {
+          // Remove from the saved list
+          savedLocations = savedLocations.filter(item => item !== location);
+          heartIcon.classList.remove('active');
+      } else {
+          // Add to the saved list
+          savedLocations.push(location);
+          heartIcon.classList.add('active');
+      }
+
+      // Update local storage
+      localStorage.setItem('savedLocations', JSON.stringify(savedLocations));
+  });
+
+  function updateHeartIcon() {
+      var location = document.getElementById('weather-location').textContent;
+      if (savedLocations.includes(location)) {
+          heartIcon.classList.add('active');
+      } else {
+          heartIcon.classList.remove('active');
+      }
+  }
+});
 
 
 
