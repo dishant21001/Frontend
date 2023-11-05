@@ -24,24 +24,70 @@
 }
 
 
-[data-theme="dark"] {
-  --bg-color: #181818;
-  --text-color: #f0f0f0;
-  --nav-color: #333;
+
+
+/* Add this to your CSS file */
+.dark-mode {
+  background-color: #121212; /* Dark background color */
+  color: white; /* Light text color for contrast */
 }
 
-body.dark {
-    background-color: #157ebe;
-    color: #eaeaea;
+.dark-mode .header,
+.dark-mode .navbar,
+.dark-mode .subheading,
+.dark-mode .weather-section,
+.dark-mode .current-weather,
+.dark-mode .seven-day-forecast,
+.dark-mode .news-updates,
+.dark-mode .footer, 
+.dark-mode .hr,
+.dark-mode .hourly-forecast-section,
+.dark-mode .wd,
+.dark-mode .additional-weather-details,
+.dark-mode .nu,
+.dark-mode .news-updates,
+.dark-mode .map,
+.dark-mode .map-container {  
+  background-color: #1a1a1a; /* Slightly lighter dark color for sections */
+  color: #ddd; /* Even lighter text color for readability */
 }
 
-body.dark .navbar a {
-    color: #eaeaea;
+.dark-mode img {
+  filter: brightness(0.8); /* Dim images for dark mode */
 }
 
-body.dark .header {
-    background-color: rgb(3, 48, 90);
+
+/* Default Light Theme */
+body {
+  background-color: #fff; /* White background */
+  color: #333; /* Dark text */
 }
+
+
+/* Dark Theme - applied when the body has the .dark-mode class */
+body.dark-mode {
+  background-color: #121212; /* Dark background */
+  color: #ccc; /* Lighter text color for dark background */
+}
+
+
+/* Specific elements that need additional styling in dark mode */
+.dark-mode h2 {
+  color: #fff; /* White color for headings */
+}
+
+.dark-mode .forecast-day{
+  background-color: #121212; /* Dark background */
+  color: #ccc; /* Lighter text color for dark background */
+}
+
+
+
+
+
+
+
+
 
 body {
   background-image: url(Images/344403.jpg); /* Adjust the path to your image */
@@ -284,7 +330,7 @@ section {
     display: flex;
     justify-content: space-around; /* Distributes items evenly */
     flex-wrap: wrap; /* Allows items to wrap onto next line if there's not enough space */
-    border-radius: 10px;
+    border-radius: 0px;
 
 }
 
@@ -423,8 +469,7 @@ section {
 }
 
 .hourly-forecast-section {
-  margin-left: 110px;
-  margin-right: 110px;
+
   /* background-color: #f4f4f4; or any color you prefer */
   padding: 20px;
   border-radius: 5px;
@@ -456,9 +501,7 @@ section {
   border: 1px solid #007BFF;
   background-color: rgba(255, 255, 255, 0.3); /* Slight white transparency */  
   padding: 20px;
-  margin-top: 50px;
-  margin-left: 110px;
-  margin-right: 110px;
+
 }
 
 .details-grid {
@@ -494,10 +537,7 @@ section {
   background-color: rgba(255, 255, 255, 0.3); /* Slight white transparency */
   border-radius: 5px;
   border: 1px solid #007BFF;
-  margin-left: 110px;
-  margin-right: 110px;
-  margin-top: 50px;
-  margin-bottom: 50px;
+  
 }
 
 .news-container {
@@ -535,7 +575,7 @@ section {
 
 
 .footer {
-  margin-top: 10px;
+
   background-color: #2B2D30; /* Darker grey for elegance */
   color: #FFFFFF; /* White color for text */
   padding: 40px 10%; /* Spacious padding with 10% horizontal padding for responsiveness */
@@ -670,10 +710,7 @@ section {
   background-color: rgba(255, 255, 255, 0.3); /* Slight white transparency */
   border-radius: 5px;
   border: 1px solid #007BFF;
-  margin-left: 110px;
-  margin-right: 110px;
-  margin-top: 50px;
-  margin-bottom: 50px;
+
 }
 
 .map-title {

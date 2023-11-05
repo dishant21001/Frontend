@@ -20,39 +20,26 @@ window.onscroll = () => {
 }
 
 
-document.getElementById('dark-mode-toggle').addEventListener('click', function() {
-  document.body.classList.toggle('dark');
-});
-
-document.addEventListener('DOMContentLoaded', function() {
+// Add this inside your script tag or a JavaScript file
+function toggleDarkMode() {
+  const body = document.body;
   const darkModeToggle = document.getElementById('dark-mode-toggle');
-  const currentTheme = localStorage.getItem('theme');
-  const loginAnchor = document.querySelector('.login-btn');
-    
-    loginAnchor.addEventListener('click', function(event) {
-        console.log('Login button clicked');
-      });
-      
-  // Set the initial icon based on the theme
-  if (currentTheme === 'dark') {
-      document.documentElement.setAttribute('data-theme', 'dark');
-      darkModeToggle.className = "fas fa-sun"; // Sun icon for dark mode
+  
+  // Toggle the "dark-mode" class on the body
+  body.classList.toggle('dark-mode');
+  
+  // Change the icon or text of the dark mode toggle button accordingly
+  if (body.classList.contains('dark-mode')) {
+      darkModeToggle.classList.replace('fa-moon', 'fa-sun');
   } else {
-      darkModeToggle.className = "fas fa-moon"; // Moon icon for light mode
+      darkModeToggle.classList.replace('fa-sun', 'fa-moon');
   }
+}
 
-  darkModeToggle.addEventListener('click', function() {
-      let theme = 'light'; 
-      if (!document.documentElement.getAttribute('data-theme')) {
-          theme = 'dark';
-          darkModeToggle.className = "fas fa-sun"; // Switch to sun icon
-      } else {
-          darkModeToggle.className = "fas fa-moon"; // Switch to moon icon
-      }
-      document.documentElement.setAttribute('data-theme', theme);
-      localStorage.setItem('theme', theme); // store the user choice
-  });
-});
+// Attach the event listener to the dark mode toggle button
+document.getElementById('dark-mode-toggle').addEventListener('click', toggleDarkMode);
+
+
 
 
 document.addEventListener("DOMContentLoaded", function() {
