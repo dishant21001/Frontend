@@ -36,6 +36,21 @@ function toggleDarkMode() {
   }
 }
 
+  //COnvert Celius to F button
+  let tempBtn = document.getElementById("tempUnit");
+  const toggleUnit = () => {
+    // Write your code to manipulate the DOM here
+  document.body.classList.toggle("cmode");
+      if (document.body.classList.contains("cmode")) 
+      {
+            tempBtn.innerHTML ="°F " ;
+      } 
+      else {
+            tempBtn.innerHTML = "°C";
+      }
+  }
+  tempBtn.addEventListener("click", toggleUnit);
+  
 // Attach the event listener to the dark mode toggle button
 document.getElementById('dark-mode-toggle').addEventListener('click', toggleDarkMode);
 
