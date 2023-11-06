@@ -29,15 +29,13 @@
 
         <a href="#home" class="logo"> <img src="Images/LOGO1.png" alt=""> </a>
     
-        <form action="" class="search-form" onsubmit="event.preventDefault(); fetchWeatherData(document.getElementById('search-box').value);">
-            <input type="search" name="" placeholder="search location ..." id="search-box">
+        <form class="search-form" onsubmit="event.preventDefault(); fetchWeatherData(document.getElementById('search-box').value);">
+            <input class='input' type="search" name="" placeholder="Search location ..." id="search-box">
             <label for="search-box" class="fas fa-search"></label>
         </form>
-
-
-        <a href="login.html" class="login-btn">Login</a>
     
         <div class="icons">
+            <a href="login.html" class="login-btn">Login</a>
             <div id="menu-btn" class="fas fa-bars"></div>
             <div id="search-btn" class="fas fa-search"></div>
             <a href="fav.html" class="fas fa-heart" id="save-favorite"></a>
@@ -49,23 +47,14 @@
     
     </header>
 
-    <section class="subheading">
-        <a href="#home" class="subheading-btn">home</a>
-        <a href="#weather" class="subheading-btn">weather</a>
-        <a href="maps.html" class="maps-btn">maps</a>
-        <a href="#hourly forecast" class="subheading-btn">hourly forecast</a>
-        <a href="monthly.html" class="monthlyForecast-btn">monthlyForecast</a>
-        <a href="feedback.html" class="feedback-btn">feedback</a>
-    </section>
-
     <!-- navbar section  -->
 
     <nav class="navbar">
         <div id="close-navbar" class="fas fa-times"></div>
-        <a href="#home">home</a>
-        <a href="#weather">weather</a>
+        <a href="#home" class="subheading-btn">home</a>
+        <a href="#weather" class="subheading-btn">weather</a>
         <a href="maps.html" class="maps-btn">maps</a>
-        <a href="#hourly forecast">hourly forecast</a>
+        <a href="#hourly forecast" class="subheading-btn">hourly forecast</a>
         <a href="monthly.html" class="monthlyForecast-btn">monthlyForecast</a>
         <a href="feedback.html" class="feedback-btn">feedback</a>
     </nav>
@@ -340,6 +329,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lightgallery-js/1.4.0/js/lightgallery.min.js"></script>
 
     <script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
+
     <!-- custom js file link      -->
 <script src="script.js"></script>
 
