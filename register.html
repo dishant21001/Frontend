@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Account</title>
+    <link rel="stylesheet" href="register.css">
+</head>
+<body>
+
+    <div class="logo-container">
+        <img src="/Images/LOGO1.png" alt="Your Website Logo">
+    </div>
+
+<div class="register-container">
+    <h2>Create Account</h2>
+    <form id="register" onsubmit="registerUser(event)" action="register.html">
+        <!-- Full Name Field -->
+        <label for="fullname">Full Name</label>
+        <input type="text" id="fullname" name="fullname" placeholder="Your Full Name" required>
+        
+        <!-- Email Field -->
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" placeholder="Your Email" required>
+        
+        <!-- Username Field -->
+        <label for="username">Username</label>
+        <input type="text" id="username" name="username" placeholder="Choose a Username" required>
+        
+        <!-- Password Field -->
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" placeholder="Create a Password" required>
+        
+        <!-- Confirm Password Field -->
+        <label for="confirmpassword">Confirm Password</label>
+        <input type="password" id="confirmpassword" name="confirmpassword" placeholder="Confirm Your Password" required>
+        
+        <!-- Submit Button -->
+        <input type="submit" value="Create Account">
+    </form>
+    <!-- Link to Login Page -->
+    <p>Already have an account? <a href="login.html">Log in here</a>.</p>        
+</div>
+
+<script>
+    function registerUser(event) {
+        event.preventDefault(); // Prevent the form from submitting the traditional way
+        
+        // Get the value from the form fields
+        var fullname = document.getElementById('fullname').value;
+        var email = document.getElementById('email').value;
+        var username = document.getElementById('username').value;
+        var password = document.getElementById('password').value;
+    
+        // Store user data in local storage
+        localStorage.setItem('fullname', fullname);
+        localStorage.setItem('email', email);
+        localStorage.setItem('username', username);
+        localStorage.setItem('password', password); // In a real application, NEVER store passwords in local storage or in plain text.
+    
+        // Redirect to the login page after registration
+        window.location.href = 'login.html';
+    }
+    </script>
+
+</body>
+</html>

@@ -1,42 +1,61 @@
-<head>
-    <link rel="stylesheet" type="text/css" href="home.css"/>
- </head>
- <html>
+<!DOCTYPE html>
+<html>
 <head>
     <title>Login Form</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" type="text/css" href="home.css"/>
+    <link rel="stylesheet" href="login.css">
 </head>
 <body>
 
-      <!-- Logo at the top -->
+    <!-- Logo at the top -->
     <div class="logo-container">
         <img src="/Images/LOGO1.png" alt="Your Website Logo">
     </div>
 
-    <h2>Login Page</h2><br>
     <div class="login">
-    <form id="login" method="get" action="login.php">
-        <label><b>User Name
-        </b>
-        </label>
-        <input type="text" name="Uname" id="Uname" placeholder="Username">
-        <br><br>
-        <label><b>Password
-        </b>
-        </label>
-        <input type="Password" name="Pass" id="Pass" placeholder="Password">
-        <br><br>
-        <input type="button" name="log" id="log" value="Log In Here">
-        <input type="button" name="pa" id="pa" value="Forgot Password?">
-        <br><br>
-        <input type="checkbox" id="check">
-        <span>Remember me</span>
-        <br><br>
+        <form id="login" onsubmit="loginUser(event)" action="login.php">
+            <label><b>User Name</b></label>
+            <input type="text" name="Uname" id="Uname" placeholder="Username">
+            <br><br>
+            <label><b>Password</b></label>
+            <input type="Password" name="Pass" id="Pass" placeholder="Password">
+            <br><br>
+            <input type="button" name="log" id="log" value="Log In Here" onclick="loginUser(event)">
+            <br><br>
+            <input type="button" name="pa" id="pa" value="Forgot Password?">
+            <a href="register.html">Create Account</a>
+            <br><br>
+            <input type="checkbox" id="check">
+            <span>Remember me</span>
+            <br><br>
+            <!-- Create Account Link -->
+            
+        </form>
+    </div>
+
+    <script>
+        function loginUser(event) {
+            event.preventDefault(); // Prevent the form from submitting the traditional way
+            
+            // Get the value from the form fields
+            var username = document.getElementById('Uname').value;
+            var password = document.getElementById('Pass').value;
         
+            // Get stored data from local storage
+            var storedUsername = localStorage.getItem('username');
+            var storedPassword = localStorage.getItem('password');
+        
+            // Check if the stored data from register-form is equal to data from login form
+            if(username === storedUsername && password === storedPassword) {
+                //alert('You are logged in.');
 
-    </form>
-</div>
-
+                window.location.href = 'index.html';
+                // Redirect to user profile page or wherever you want
+            } else {
+                alert('ERROR: Invalid username or password.');
+            }
+        }
+        </script>
 
 </body>
 </html>

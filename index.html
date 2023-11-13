@@ -29,43 +29,29 @@
 
         <a href="#home" class="logo"> <img src="Images/LOGO1.png" alt=""> </a>
     
-        <form action="" class="search-form" onsubmit="event.preventDefault(); fetchWeatherData(document.getElementById('search-box').value);">
-            <input type="search" name="" placeholder="search location ..." id="search-box">
+        <form class="search-form" onsubmit="event.preventDefault(); fetchWeatherData(document.getElementById('search-box').value);">
+            <input class='input' type="search" name="" placeholder="Search location ..." id="search-box">
             <label for="search-box" class="fas fa-search"></label>
         </form>
-
-
-        <a href="login.html" class="login-btn">Login</a>
     
         <div class="icons">
+            <a href="login.html" class="login-btn">Login/Sign-up</a>
             <div id="menu-btn" class="fas fa-bars"></div>
             <div id="search-btn" class="fas fa-search"></div>
-            <a href="fav.html" class="fas fa-heart" id="save-favorite"></a>
+            <a href="favroite.html" class="fas fa-heart" id="save-favorite"></a>
             <div id="dark-mode-toggle" class="fas fa-moon"></div>
-
         </div>
-
-
     
     </header>
-
-    <section class="subheading">
-        <a href="#home" class="subheading-btn">home</a>
-        <a href="#weather" class="subheading-btn">weather</a>
-        <a href="maps.html" class="maps-btn">maps</a>
-        <a href="#hourly forecast" class="subheading-btn">hourly forecast</a>
-        <a href="monthly.html" class="monthlyForecast-btn">monthlyForecast</a>
-        <a href="feedback.html" class="feedback-btn">feedback</a>
-    </section>
 
     <!-- navbar section  -->
 
     <nav class="navbar">
         <div id="close-navbar" class="fas fa-times"></div>
-        <a href="#home">home</a>
-        <a href="#weather">weather</a>
+        <a href="index.html" class="subheading-btn">home</a>
+        <a href="#weather" class="subheading-btn">weather</a>
         <a href="maps.html" class="maps-btn">maps</a>
-        <a href="#hourly forecast">hourly forecast</a>
+        <a href="#hourly forecast" class="subheading-btn">hourly forecast</a>
         <a href="monthly.html" class="monthlyForecast-btn">monthlyForecast</a>
         <a href="feedback.html" class="feedback-btn">feedback</a>
     </nav>
@@ -94,8 +80,8 @@
                 <p><strong>Location:</strong> <span id="weather-location">N/A</span></p>
                 <p><strong>Temperature:</strong> <span id="weather-temperature">N/A</span>°C</p>
                 <p><strong>Condition:</strong> <span id="weather-condition">N/A</span></p>
-                <p><strong>Humidity:</strong> <span id="weather-humidity">N/A</span>%</p>
-                <p><strong>Wind Speed:</strong> <span id="weather-wind">N/A</span> km/h</p>
+                <p><strong>Humidity:</strong> <span id="weather-humidity">N/A</span></p>
+                <p><strong>Wind Speed:</strong> <span id="weather-wind">N/A</span></p>
             </div>
         </section>
 
@@ -207,30 +193,29 @@
         </div>
     </section>
     <!-- Additional Weather Details Ends -->
-</section>
+    </section>
 
 
     <!-- News and Updates Section Starts -->
     <section class = 'nu'>
-    <section class="news-updates">
-        <h2>News and Updates</h2>
-        <div class="news-container">
-            <!-- Each of these divs represents a news/update item. You can add as many as needed. -->
-            <div class="news-item">
-                <h3>Weather Alert</h3>
-                <p>There is a thunderstorm warning in the northeast region for the next 24 hours. Residents are advised to stay indoors and avoid travel.</p>
-                <span class="news-date">Nov 1, 2023</span>
+        <section class="news-updates">
+            <h2>News and Updates</h2>
+            <div class="news-container">
+                <!-- Each of these divs represents a news/update item. You can add as many as needed. -->
+                <div class="news-item">
+                    <h3>Weather Alert</h3>
+                    <p>There is a thunderstorm warning in the northeast region for the next 24 hours. Residents are advised to stay indoors and avoid travel.</p>
+                    <span class="news-date">Nov 1, 2023</span>
+                </div>
+                <div class="news-item">
+                    <h3>Weather Facts</h3>
+                    <p>Did you know? Lightning can heat the air it passes through to 50,000 degrees Fahrenheit (5 times hotter than the surface of the sun).</p>
+                    <span class="news-date">Nov 1, 2023</span>
+                </div>
+                <!-- Add more news items as needed -->
             </div>
-            <div class="news-item">
-                <h3>Weather Facts</h3>
-                <p>Did you know? Lightning can heat the air it passes through to 50,000 degrees Fahrenheit (5 times hotter than the surface of the sun).</p>
-                <span class="news-date">Nov 1, 2023</span>
-            </div>
-            <!-- Add more news items as needed -->
-        </div>
+        </section>
     </section>
-    </section>
-
 
     <!-- News and Updates Section Ends -->
 
@@ -238,7 +223,7 @@
     <section class = "map">
     <div class="map-container">
         <h2>Maps</h2>
-        <div id="mapid" style="width: 950px; height: 300px;"></div>
+        <div id="mapid" ></div>
     </div>
     </section>
 
@@ -340,6 +325,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lightgallery-js/1.4.0/js/lightgallery.min.js"></script>
 
     <script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
+
     <!-- custom js file link      -->
 <script src="script.js"></script>
 

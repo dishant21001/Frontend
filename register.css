@@ -1,0 +1,83 @@
+body {
+    font-family: Arial, sans-serif;
+    background-image: url(./Images/344403.jpg);
+    margin: 0;
+    padding: 0;
+}
+
+.logo-container {
+    text-align: center; /* Centers the logo */
+    padding: 20px 0;
+}
+
+.logo-container img{
+  width: 350px;
+  height: 6rem;
+  border-radius: 25px;
+}
+
+.register-container {
+    justify-content: center ;
+    width: 400px;
+    padding: 20px;
+    border-radius: 15px;
+    background-image: url(./Images/b.jpg);
+    margin: 50px auto;
+    box-shadow: 0px 0px 10px 0px #000;
+    text-align: center;
+}
+
+.register-container h2 {
+    margin-bottom: 20px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    box-sizing: border-box; /* Include padding in the element's total width and height */
+    cursor: pointer;
+}
+
+input[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    background: rgb(52, 5, 224);
+    border: 0;
+    cursor: pointer;
+    color: #fff;
+    font-size: 16px;
+}
+
+input[type="submit"]:hover {
+    background: #22a2bf;
+}
+
+form label {
+    float: left;
+    text-align: left;
+    margin-top: 10px;
+    color: #333;
+}
+
+form input {
+    clear: both;
+}
+
+p {
+    color: #000000;
+    font-size: 14px;
+}
+
+a {
+    text-decoration: underline;
+    color: rgb(52, 5, 224);
+}
+
+a:hover{
+    color: aqua;
+}

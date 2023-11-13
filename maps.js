@@ -19,7 +19,20 @@ const cities = [
   'Albuquerque', 'Tucson', 'Fresno', 'Sacramento', 'Kansas City',
   'Atlanta', 'Miami', 'Colorado Springs', 'Raleigh', 'Omaha',
   'Long Beach', 'Virginia Beach', 'Oakland', 'Minneapolis', 'Tulsa',
-  'Arlington', 'New Orleans', 'Wichita', 'Dallas',  // ... more cities if needed
+  'Arlington', 'New Orleans', 'Wichita', 'Dallas', "New York",
+  "Los Angeles", "Chicago", "Houston", "Phoenix", "Philadelphia", "San Antonio",
+  "San Diego","Dallas", "San Jose", "London", "Birmingham", "Leeds", "Glasgow",
+  "Sheffield", "Manchester", "Edinburgh", "Liverpool", "Bristol", "Cardiff",
+  "Tokyo", "Yokohama", "Osaka", "Nagoya", "Sapporo", "Fukuoka", "Kobe", "Kyoto",
+  "Saitama", "Hiroshima", "Delhi", "Mumbai", "Kolkata", "Bangalore", "Chennai",
+  "Hyderabad", "Pune", "Ahmedabad", "Surat", "Jaipur", "Beijing", "Shanghai",
+  "Guangzhou", "Shenzhen", "Chengdu", "Xi'an",  "Wuhan", "Tianjin", "Hangzhou",
+  "Nanjing", "Sydney", "Melbourne", "Brisbane", "Perth", "Adelaide",
+  "Gold Coast", "Canberra", "Newcastle", "Wollongong", "Logan City", "Paris",
+  "Marseille", "Lyon", "Toulouse", "Nice","Nantes", "Strasbourg", "Montpellier", "Bordeaux",
+  "Lille", "Berlin", "Hamburg", "Munich", "Cologne", "Frankfurt", "Stuttgart", "Düsseldorf",
+  "Dortmund", "Essen", "Leipzig", "Rio de Janeiro","São Paulo", "Salvador", "Brasília", "Fortaleza",
+  "Belo Horizonte", "Manaus", "Curitiba", "Recife", "Porto Alegre"  // ... more cities if needed
 ];
 
 // Function to update the weather data and place markers on the map
@@ -47,3 +60,12 @@ updateWeatherForUSACities();
 
 // Update weather every 30 minutes
 setInterval(updateWeatherForUSACities, 1800000);
+
+const homeButton = document.getElementById('home-button');
+    homeButton.addEventListener('click', function() {
+        // Option 1: Navigate to the homepage or any other URL
+        window.location.href = '/'; // Assuming the root is your homepage
+
+        // Option 2: Suggest the user to close the tab
+        // alert("Please close this tab to return to your home screen.");
+    });

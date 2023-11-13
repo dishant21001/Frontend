@@ -91,4 +91,8 @@ function fetchMonthlyWeatherData(month, year, callback) {
         });
 }
 
-
+const homeButton = document.getElementById('home-button');
+    homeButton.addEventListener('click', function() {
+        // Option 1: Navigate to the homepage or any other URL
+        window.location.href = '/'; // Assuming the root is your homepage
+    });
