@@ -54,7 +54,7 @@
 }
 
 .dark-mode .header{
-  background-color: #1a14b9;
+  background-color: rgba(0, 0, 0, 0.5);
 }
 
 /* Default Light Theme */
@@ -187,7 +187,7 @@ section {
 
 .header{
     padding:1.5rem 9%;
-    background-color: #007BFF;
+    background-color: rgba(0, 0, 0, 0.5);
     background-repeat: no-repeat;
     box-shadow: 0 .5rem 1rem rgba(0,0,0,.1);
     display: flex;
