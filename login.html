@@ -14,11 +14,11 @@
         <div class="login-container">
             <h1>Login</h1>
             <form id="login-form">
-                <label for="username"><i class="user-icon"></i>Email</label>
+                <label for="email"><i class="user-icon"></i>Email</label>
                 <input type="text" id="email" name="email" required placeholder="Enter your email"><br>
 
                 <label for="password"><i class="lock-icon"></i>Password</label>
-                <input type="text" id="password" name="password" required placeholder="Enter your password"><br>
+                <input type="password" id="password" name="password" required placeholder="Enter your password"><br>
 
                 <button id="login">Login</button>
             </form>
@@ -59,7 +59,6 @@
                     .then((userCredential) => {
                         // Signed in 
                         const user = userCredential.user;
-                        window.location.href = 'index.html';
                     })
                     .catch((error) => {
                         const errorCode = error.code;
@@ -86,6 +85,7 @@
                 // User is signed in, see docs for a list of available properties
                 // https://firebase.google.com/docs/reference/js/auth.user
                 const uid = user.uid;
+                window.location.href = "index.html";
                 // ...
             } else {
                 // User is signed out
