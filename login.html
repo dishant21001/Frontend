@@ -2,61 +2,96 @@
 <html>
 <head>
     <title>Login Form</title>
-    <link rel="stylesheet" type="text/css" href="home.css"/>
     <link rel="stylesheet" href="login.css">
 </head>
 <body>
 
-    <!-- Logo at the top -->
-    <div class="logo-container">
-        <img src="Images/LOGO1.png" alt="Weather Brainiac Logo">    
-    </div>
+        <!-- App bar -->
+        <div class="header">
+            <a href="index.html" class="logo"> <img src="Images/LOGO1.png" alt=""> </a>
+        </div>
+        <!-- Login Container -->
+        <div class="login-container">
+            <h1>Login</h1>
+            <form id="login-form">
+                <label for="username"><i class="user-icon"></i>Email</label>
+                <input type="text" id="email" name="email" required placeholder="Enter your email"><br>
 
-    <div class="login">
-    <form id="login" method="get" action="login.php">
-        <label><b>User Name
-        </b>
-        </label>
-        <input type="text" name="Uname" id="Uname" placeholder="Username">
-        <br><br>
-        <label><b>Password
-        </b>
-        </label>
-        <input type="Password" name="Pass" id="Pass" placeholder="Password">
-        <br><br>
-        <input type="button" name="log" id="log" value="Log In Here">
-        <input type="button" name="pa" id="pa" value="Forgot Password?">
-        <br><br>
-        <input type="checkbox" id="check">
-        <span>Remember me</span>
-        <br><br>
-        
+                <label for="password"><i class="lock-icon"></i>Password</label>
+                <input type="text" id="password" name="password" required placeholder="Enter your password"><br>
 
-    </form>
-</div>
+                <button id="login">Login</button>
+            </form>
+            <p>Don't have an account? <a href="register.html">Create an account</a></p>
+        </div>
 
-    <script>
-        function loginUser(event) {
-            event.preventDefault(); // Prevent the form from submitting the traditional way
+
+        <script type="module">
+            import { initializeApp } from "https://www.gstatic.com/firebasejs/10.6.0/firebase-app.js";
+            import { getAuth, signInWithEmailAndPassword, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.6.0/firebase-auth.js";
+            // Your web app's Firebase configuration
+            // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+            const firebaseConfig = {
+                apiKey: "AIzaSyDH3MTTgijLG7d5Q4t6nrpEuJnFMrL3ips",
+                authDomain: "weatherbrainiac.firebaseapp.com",
+                projectId: "weatherbrainiac",
+                storageBucket: "weatherbrainiac.appspot.com",
+                messagingSenderId: "373997009223",
+                appId: "1:373997009223:web:e09b0883f6863695a87462",
+                measurementId: "G-1JLB0DJ69R"
+            };
             
-            // Get the value from the form fields
-            var username = document.getElementById('Uname').value;
-            var password = document.getElementById('Pass').value;
-        
-            // Get stored data from local storage
-            var storedUsername = localStorage.getItem('username');
-            var storedPassword = localStorage.getItem('password');
-        
-            // Check if the stored data from register-form is equal to data from login form
-            if(username === storedUsername && password === storedPassword) {
-                //alert('You are logged in.');
+            // Initialize Firebase
+            const app = initializeApp(firebaseConfig);
+    
+            const auth = getAuth(app);
+    
+            document.getElementById('login').addEventListener('click', login)
+    
+            // Validate input and register User
+            function login() {
+                
+                // Get the value from the form fields
+                var email = document.getElementById('email').value;
+                var password = document.getElementById('password').value;
+            
+                signInWithEmailAndPassword(auth, email, password)
+                    .then((userCredential) => {
+                        // Signed in 
+                        const user = userCredential.user;
+                        window.location.href = 'index.html';
+                    })
+                    .catch((error) => {
+                        const errorCode = error.code;
+                        const errorMessage = error.message;
 
-                window.location.href = 'index.html';
-                // Redirect to user profile page or wherever you want
-            } else {
-                alert('ERROR: Invalid username or password.');
+                        switch (errorCode) {
+                            case 'auth/user-not-found':
+                                alert('User not found. Please check your email and try again or register a new account.');
+                                break;
+                            case 'auth/wrong-password':
+                                alert('Invalid password. Please check your password and try again.');
+                                break;
+                            case 'auth/invalid-email':
+                                alert('Invalid email address. Please enter a valid email.');
+                                break;
+                            default:
+                                alert(`Sign-in failed: ${errorMessage}`);
+                        }
+                    });
             }
-        }
+
+            onAuthStateChanged(auth, (user) => {
+            if (user) {
+                // User is signed in, see docs for a list of available properties
+                // https://firebase.google.com/docs/reference/js/auth.user
+                const uid = user.uid;
+                // ...
+            } else {
+                // User is signed out
+                // ...
+            }
+            });
         </script>
 
 </body>

@@ -1,112 +1,116 @@
 body
 {
+    font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    height: 100vh;
     background-image: url(./Images/344403.jpg);
-    font-family: 'Arial';
-    
-}
-.login{
-        width: 382px;
-        overflow: hidden;
-        margin: 20px auto;
-        padding: 50px;
-        background-image: url(./Images/b.jpg);
-        border-radius: 15px ;
-        box-shadow: 0px 0px 10px 0px #000;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        /*background-color: rgba(255, 255, 255, 0.4); */
+    background-size:100%;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: fit-content;
 }
 
-.logo-container {
-    text-align: center; /* Centers the logo */
-    /*padding: 20px 0; Adds some space around the logo */
-    
+.header{
+    overflow: hidden;
+    background-color: #007BFF;
+    background-size: 100%;
+    background-position: center;
+    background-repeat:no-repeat;
+    height: 80px;
+    width: 100%;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    padding-top: 0;
 }
 
-.logo-container img {
-    max-width: 200px;
-    height: auto;
+.header .logo{
+    height: 100%;
+    margin-left: 120px;
+    display: flex;
+    align-items: center;
 }
 
-h2{
+img{
+    height: 70%;
+    width: 100%;
+    border-radius: 20px;
+}
+
+h1{
     text-align: center;
-    color: var(--black);
+    font-weight: bold;
+}
+
+.user-icon{
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    background-image: url('./Images/user.png');
+    background-size: cover;
+    margin-right: 10px;
+}
+
+.lock-icon{
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    background-image: url('./Images/lock.png');
+    background-size: cover;
+    margin-right: 10px;
+}
+
+.login-container{
+    width: 300px;
+    background-color: #ffffff;
     padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    justify-content: center;
+    margin: 200px;
 }
+
+#login-form{
+    text-align: center;
+}
+
 label{
-    color: #000806;
-    font-size: 17px;
-}
-#Uname{
-    width: 300px;
-    height: 30px;
-    border: none;
-    border-radius: 3px;
-    padding-left: 8px;
-    margin: 15px auto;
-}
-#Pass{
-    width: 300px;
-    height: 30px;
-    border: none;
-    border-radius: 3px;
-    padding-left: 8px;
-    margin: 15px auto;
-
-}
-#log{
-    width: 300px;
-    height: 30px;
-    border: none;
-    border-radius: 17px;
-    padding-left: 7px;
-    color: #000806;
-    background-color: var(--white);
-    cursor: pointer;
-}
-
-#pa{
-    margin-top: 20px;
-    width: 150px;
-    height: 25px;
-    border: none;
-    border-radius: 17px;
-    padding-left: 7px;
-    color: #000806;
-    background-color: var(--white);
-    cursor: pointer;
+    display: block;
     text-align: left;
-    font-size: 15px;
+    margin-bottom: 5px;
+}
+
+label .required {
+    color: red;
+    margin-left: 5px;
+}
+
+input{
+    width: 90%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+button{
+    width: 90%;
+    padding: 10px;
+    color: #fff;
+    border: none;
+    border-radius: 50px;
     cursor: pointer;
+    margin-bottom: 20px;
+    background-image: linear-gradient(45deg, #ff00ff, #1400c4, #00a2ff);
+    background-size: 200% 200%;
+    transition: background-position 0.5s;
 }
 
-#pa:hover{
-    text-decoration: underline;
-}
-
-
-
-span{
-    color: #000806;
-    font-size: 17px;
-}
-
-a{
-    float: right;
-    width: 130px;
-    height: 25px;
-    border-radius: 17px;
-    padding-left: 7px;
-    background-color: var(--white);
-    font-size: 15px;
-    margin-top: 20px;
-}
-
-a:hover {
-    text-decoration: underline;
+button:hover{
+    background-position: right center;
 }
