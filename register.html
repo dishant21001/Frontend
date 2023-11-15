@@ -8,13 +8,13 @@
 </head>
 <body>
 
-    <div class="logo-container">
-        <img src="/Images/LOGO1.png" alt="Your Website Logo">
+    <!-- App bar -->
+    <div class="header">
+        <a href="index.html" class="logo"> <img src="Images/LOGO1.png" alt=""> </a>
     </div>
 
 <div class="register-container">
     <h2>Create Account</h2>
-    <form id="register" onsubmit="registerUser(event)" action="register.html">
         <!-- Full Name Field -->
         <label for="fullname">Full Name</label>
         <input type="text" id="fullname" name="fullname" placeholder="Your Full Name" required>
@@ -22,10 +22,6 @@
         <!-- Email Field -->
         <label for="email">Email</label>
         <input type="email" id="email" name="email" placeholder="Your Email" required>
-        
-        <!-- Username Field -->
-        <label for="username">Username</label>
-        <input type="text" id="username" name="username" placeholder="Choose a Username" required>
         
         <!-- Password Field -->
         <label for="password">Password</label>
@@ -36,31 +32,87 @@
         <input type="password" id="confirmpassword" name="confirmpassword" placeholder="Confirm Your Password" required>
         
         <!-- Submit Button -->
-        <input type="submit" value="Create Account">
-    </form>
+        <button id="SignUp">Create account</button>
     <!-- Link to Login Page -->
     <p>Already have an account? <a href="login.html">Log in here</a>.</p>        
 </div>
 
-<script>
-    function registerUser(event) {
-        event.preventDefault(); // Prevent the form from submitting the traditional way
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.6.0/firebase-app.js";
+        import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.6.0/firebase-auth.js";
+        // Your web app's Firebase configuration
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+        const firebaseConfig = {
+            apiKey: "AIzaSyDH3MTTgijLG7d5Q4t6nrpEuJnFMrL3ips",
+            authDomain: "weatherbrainiac.firebaseapp.com",
+            projectId: "weatherbrainiac",
+            storageBucket: "weatherbrainiac.appspot.com",
+            messagingSenderId: "373997009223",
+            appId: "1:373997009223:web:e09b0883f6863695a87462",
+            measurementId: "G-1JLB0DJ69R"
+        };
         
-        // Get the value from the form fields
-        var fullname = document.getElementById('fullname').value;
-        var email = document.getElementById('email').value;
-        var username = document.getElementById('username').value;
-        var password = document.getElementById('password').value;
-    
-        // Store user data in local storage
-        localStorage.setItem('fullname', fullname);
-        localStorage.setItem('email', email);
-        localStorage.setItem('username', username);
-        localStorage.setItem('password', password); // In a real application, NEVER store passwords in local storage or in plain text.
-    
-        // Redirect to the login page after registration
-        window.location.href = 'login.html';
-    }
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+
+        const auth = getAuth(app);
+
+        document.getElementById('SignUp').addEventListener('click', registerUser)
+
+        // Validate input and register User
+        function registerUser() {
+            
+            // Get the value from the form fields
+            var fullName = document.getElementById('fullname').value;
+            var email = document.getElementById('email').value;
+            var password = document.getElementById('password').value;
+            var confirmPassword = document.getElementById('confirmpassword').value;
+        
+            // Regular expressions for validation
+            var nameRegex = /^[a-zA-Z\s]+$/;
+            var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+            // Validate Full Name
+            if (!nameRegex.test(fullName)) {
+                alert('Please enter a valid full name.');
+                return;
+            }
+
+            // Validate Email
+            if (!emailRegex.test(email)) {
+                alert('Please enter a valid email address.');
+                return;
+            }
+
+            // Validate Repeat Password
+            if (password !== confirmPassword) {
+                alert('Passwords do not match.');
+                return;
+            }
+
+            //Create User with Email and Password
+            createUserWithEmailAndPassword(auth, email, password)
+                .then((userCredential) => {
+                    const user = userCredential.user;
+                    window.location.href = 'login.html';
+                })
+                .catch((error) => {
+                    const errorCode = error.code;
+                    const errorMessage = error.message;
+
+                    switch (errorCode) {
+                    case 'auth/weak-password':
+                        alert('The password is too weak. Please choose a stronger password.');
+                        break;
+                    case 'auth/email-already-in-use':
+                        alert('The email address is already in use by another account.');
+                        break;
+                    default:
+                        alert(`Registration failed: ${errorMessage}`);
+                }
+                });
+
+        }
     </script>
 
 </body>
