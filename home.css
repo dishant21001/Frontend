@@ -219,7 +219,14 @@ section {
         }
       }
 
-    .icons a,
+      .icons{
+        display: flex;
+        
+      }
+      .icons > div:first-child {
+        /* first div of icons( login button) */
+         width: 6.2rem;
+       }
     .icons div{
         height: 4.5rem;
         width: 4.5rem;

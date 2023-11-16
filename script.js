@@ -41,6 +41,46 @@ document.getElementById('dark-mode-toggle').addEventListener('click', toggleDark
 
 
 
+ //Convert Celius to F button
+ let tempBtn = document.getElementById("tempUnit");
+ let isFmode = false;
+ subLocation = 'dallas'
+ const toggleUnit = (subLocation) => {
+   // Write your code to manipulate the DOM here
+    isFmode = !isFmode; //toggle
+     if (isFmode) 
+     {
+          tempBtn.innerHTML ="°F " ;
+          
+     } 
+     else {
+          tempBtn.innerHTML = "°C";
+          
+     }
+    fetch7DayForecast(subLocation); //update 
+    fetchCurrentWeather(subLocation);
+    //We need to update the chart temp
+    /*data.forecast.forecastday[0].hour.map(hour => isFmode ? hour.temp_c : hour.temp_f);
+    // Update the label in the chart
+    chart.data.datasets[0].label = `Temperature (°${isFmode ? 'F' : 'C'})`;
+    // Update the chart
+    chart.update();
+    */
+  }
+     
+ //update location when search
+ document.querySelector('#search-box').addEventListener('keypress', function(e) {
+  if (e.key === 'Enter') {
+      subLocation = this.value
+
+      
+  }
+});
+ tempBtn.addEventListener("click", () => toggleUnit(subLocation));
+
+
+
+
 
 document.addEventListener("DOMContentLoaded", function() {
   var ctx = document.getElementById('hourlyForecastChart').getContext('2d');
@@ -77,7 +117,7 @@ document.addEventListener("DOMContentLoaded", function() {
       fetch(url)
       .then(response => response.json())
       .then(data => {
-        forecastData = data.forecast.forecastday[0].hour.map(hour => hour.temp_c);
+        forecastData = data.forecast.forecastday[0].hour.map(hour =>  hour.temp_c);
         chart.data.datasets[0].data = forecastData;
         chart.update();
       });
@@ -136,13 +176,14 @@ function fetchCurrentWeather(location) {
     .then(data => {
       if (data && data.current) {
         document.getElementById('weather-location').textContent = location;
-        document.getElementById('weather-temperature').textContent = data.current.temp_c;
+        document.getElementById('weather-temperature').textContent = `${isFmode ? data.current.temp_f : data.current.temp_c}°${isFmode ? 'F' : 'C' }` ;
         document.getElementById('weather-condition').textContent = data.current.condition.text;
         document.getElementById('weather-humidity').textContent = data.current.humidity;
         document.getElementById('weather-wind').textContent = data.current.wind_kph;
         document.getElementById('detail-wind').textContent = `${data.current.wind_kph} km/h, ${data.current.wind_dir}`;
         document.getElementById('detail-humidity').textContent = `${data.current.humidity}%`;
-        document.getElementById('detail-feelslike').textContent = `${data.current.feelslike_c}°C`;
+        document.getElementById('detail-feelslike').textContent = `${ isFmode ? data.current.feelslike_f :
+          data.current.feelslike_c }°${isFmode ? 'F' : 'C' }`;
         document.getElementById('detail-precipitation').textContent = `${data.current.precip_mm} mm`;
         document.getElementById('detail-visibility').textContent = `${data.current.vis_miles} mi`;
       }
@@ -181,7 +222,7 @@ fetchForecast('Dallas');
 
 
 
-// Function to fetch and display the 7-day forecast
+// Function to fetch and display the 7-day forecast in Cmode
 function fetch7DayForecast(location) {
   const apiKey = '2c4fe195f69547fda56145444230211';
   const url = `http://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${location}&days=7&aqi=no&alerts=no`;
@@ -197,8 +238,8 @@ function fetch7DayForecast(location) {
         forecastDayElem.className = 'forecast-day';
         forecastDayElem.innerHTML = `
           <h3>${new Date(day.date).toLocaleDateString('en-US', { weekday: 'long' })}</h3>
-          <p>High: ${day.day.maxtemp_c}°C</p>
-          <p>Low: ${day.day.mintemp_c}°C</p>
+          <p>High: ${isFmode ? day.day.maxtemp_f : day.day.maxtemp_c}°${isFmode ? 'F' : 'C'}</p>
+          <p>Low: ${isFmode ? day.day.mintemp_f : day.day.mintemp_c}°${isFmode ? 'F' : 'C'}</p>
           <p>Condition: ${day.day.condition.text}</p>
         `;
         forecastGrid.appendChild(forecastDayElem);
@@ -259,7 +300,7 @@ function updateWeatherForUSACities() {
         const marker = L.marker([data.location.lat, data.location.lon]).addTo(markerGroup);
 
         // Create a popup with the current temperature
-        marker.bindPopup(`<b>${city}</b><br>Temperature: ${data.current.temp_c}°C`).openPopup();
+        marker.bindPopup(`<b>${city}</b><br>Temperature: ${isFmode ? data.current.temp_f : data.current.temp_c}°${isFmode ? 'F' : 'C'}`).openPopup();
       })
       .catch(error => {
         console.error(`Error fetching data for ${city}:`, error);
@@ -296,7 +337,7 @@ async function fetchWeatherData(location) {
 function updateWeatherData(data) {
   
   document.getElementById('weather-location').textContent = data.location.name;
-  document.getElementById('weather-temperature').textContent = `${data.current.temp_c}`;
+  document.getElementById('weather-temperature').textContent = `${isFmode ? data.current.temp_f : data.current.temp_c}°${isFmode ? 'F' : 'C' }`;
   document.getElementById('weather-condition').textContent = data.current.condition.text;
   document.getElementById('weather-humidity').textContent = `${data.current.humidity}%`;
   document.getElementById('weather-wind').textContent = `${data.current.wind_kph} kph`;
@@ -306,6 +347,7 @@ function updateWeatherData(data) {
   document.getElementById('detail-humidity').textContent = data.current.humidity;
   document.getElementById('detail-precipitation').textContent = data.current.precip_mm;
   document.getElementById('detail-feelslike').textContent = data.current.feelslike_c;
+  
   document.getElementById('detail-visibility').textContent = data.current.vis_km;
   // ...Update other elements as needed
 }
