@@ -223,10 +223,7 @@ section {
         display: flex;
         
       }
-      .icons > div:first-child {
-        /* first div of icons( login button) */
-         width: 6.2rem;
-       }
+       
     .icons div{
         height: 4.5rem;
         width: 4.5rem;
@@ -325,17 +322,17 @@ section {
     align-items: center; /* To vertically align the links if there are other items in the header */
   }
 
-  .login-btn {
-      padding: 10px; /* Adjust padding as needed */
-      transition: background-color 0.3s ease;
+  .login-btn img{
+    margin: 10px;
+    width: 25px;
+    height: 25px;
   }
 
-  .login-btn:hover {
-    background: #777;
-    color:#fff;  
+  .logout-btn img{
+    margin: 10px;
+    width: 25px;
+    height: 25px;
   }
-
-
 
 .subheading {
     padding: 5px 0;
