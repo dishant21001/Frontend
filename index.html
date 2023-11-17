@@ -35,10 +35,10 @@
         </form>
     
         <div class="icons">
-            <a href="login.html" class="login-btn">Login</a>
+            <a id= "login-btn" href="login.html" class="login-btn">Login</a>
             <div id="menu-btn" class="fas fa-bars"></div>
             <div id="search-btn" class="fas fa-search"></div>
-            <a href="favroite.html" class="fas fa-heart" id="save-favorite"></a>
+            <a href="favorite.html" class="fas fa-heart" id="save-favorite"></a>
             <div id="dark-mode-toggle" class="fas fa-moon"></div>
         </div>
     
@@ -301,14 +301,39 @@
       </script>
 
     
-
-
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lightgallery-js/1.4.0/js/lightgallery.min.js"></script>
 
     <script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
 
+    <script type="module">
+        import { auth, getAuth, onAuthStateChanged, signOut } from "./firebaseConfig.js";
+
+        // Check if the user is logged in
+        onAuthStateChanged(auth, (user) => {
+            if (user && user.emailVerified) {
+                // User is logged in and email is verified
+                console.log("User is logged in and email is verified.");
+                document.getElementById('login-btn').style.display = 'none';
+            } else if (user && !user.emailVerified) {
+                // User is logged in but email is not verified
+                signOut(auth)
+                console.log("User is logged in but email is not verified.");
+            } else {
+                // User is not logged in
+                console.log("User is not logged in.");
+            }
+        });
+
+
+    </script>
+    
+    <script 
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDH3MTTgijLG7d5Q4t6nrpEuJnFMrL3ips&libraries=places"
+    defer>
+    </script>
+    
     <!-- custom js file link      -->
 <script src="script.js"></script>
 
