@@ -451,3 +451,19 @@ document.addEventListener('DOMContentLoaded', function() {
       }
   }
 });
+
+//Autocomplete search
+document.addEventListener('DOMContentLoaded', () => {
+  const input = document.getElementById('search-box');
+  const options = {
+      fields: ["formatted_address", "geometry", "name"],
+      strictBounds: false,
+      };
+
+  const autocomplete = new google.maps.places.Autocomplete(input, options);
+
+  autocomplete.addListener("place_changed", () => {
+      const place = autocomplete.getPlace();
+
+  });
+});

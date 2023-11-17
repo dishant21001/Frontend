@@ -6,54 +6,31 @@
 </head>
 <body>
 
-    <!-- Logo at the top -->
-    <div class="logo-container">
-        <img src="/Images/LOGO1.png" alt="Your Website Logo">
-    </div>
+        <!-- App bar -->
+        <div class="header">
+            <a href="index.html" class="logo"> <img src="Images/LOGO1.png" alt=""> </a>
+        </div>
+        <!-- Login Container -->
+        <div class="login-container">
+            <h1>Login</h1>
+            <form id="login-form">
+                <label for="email"><i class="user-icon"></i>Email</label>
+                <input type="text" id="email" name="email" required placeholder="Enter your email"><br>
 
-    <div class="login">
-        <form id="login" onsubmit="loginUser(event)" action="login.php">
-            <label><b>User Name</b></label>
-            <input type="text" name="Uname" id="Uname" placeholder="Username">
-            <br><br>
-            <label><b>Password</b></label>
-            <input type="Password" name="Pass" id="Pass" placeholder="Password">
-            <br><br>
-            <input type="button" name="log" id="log" value="Log In Here" onclick="loginUser(event)">
-            <br><br>
-            <input type="button" name="pa" id="pa" value="Forgot Password?">
-            <a href="register.html">Create Account</a>
-            <br><br>
-            <input type="checkbox" id="check">
-            <span>Remember me</span>
-            <br><br>
-            <!-- Create Account Link -->
-            
-        </form>
-    </div>
+                <label for="password"><i class="lock-icon"></i>Password</label>
+                <input type="password" id="password" name="password" required placeholder="Enter your password"><br>
+
+                <button type="button" id="login">Login</button>
+            </form>
+            <p>Don't have an account? <a href="register.html">Create an account</a></p>
+        </div>
+
 
 
         <script type="module">
-            import { initializeApp } from "https://www.gstatic.com/firebasejs/10.6.0/firebase-app.js";
-            import { getAuth, signInWithEmailAndPassword, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.6.0/firebase-auth.js";
-            // Your web app's Firebase configuration
-            // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-            const firebaseConfig = {
-                apiKey: "AIzaSyDH3MTTgijLG7d5Q4t6nrpEuJnFMrL3ips",
-                authDomain: "weatherbrainiac.firebaseapp.com",
-                projectId: "weatherbrainiac",
-                storageBucket: "weatherbrainiac.appspot.com",
-                messagingSenderId: "373997009223",
-                appId: "1:373997009223:web:e09b0883f6863695a87462",
-                measurementId: "G-1JLB0DJ69R"
-            };
-            
-            // Initialize Firebase
-            const app = initializeApp(firebaseConfig);
-    
-            const auth = getAuth(app);
-    
-            document.getElementById('login').addEventListener('click', login)
+            import { auth, signInWithEmailAndPassword, onAuthStateChanged } from "./firebaseConfig.js";
+
+            document.getElementById('login').addEventListener('click', login);
     
             // Validate input and register User
             function login() {
@@ -65,7 +42,9 @@
                 signInWithEmailAndPassword(auth, email, password)
                     .then((userCredential) => {
                         // Signed in 
+                        alert('Error' + errorMessage);
                         const user = userCredential.user;
+                        window.location.href = "index.html";
                     })
                     .catch((error) => {
                         const errorCode = error.code;
@@ -81,24 +60,15 @@
                             case 'auth/invalid-email':
                                 alert('Invalid email address. Please enter a valid email.');
                                 break;
+                            case 'auth/invalid-login-credentials':
+                                alert('Invalid login credentials.');
+                                break;
                             default:
                                 alert(`Sign-in failed: ${errorMessage}`);
                         }
                     });
             }
 
-            onAuthStateChanged(auth, (user) => {
-            if (user) {
-                // User is signed in, see docs for a list of available properties
-                // https://firebase.google.com/docs/reference/js/auth.user
-                const uid = user.uid;
-                window.location.href = "index.html";
-                // ...
-            } else {
-                // User is signed out
-                // ...
-            }
-            });
         </script>
 
 </body>
