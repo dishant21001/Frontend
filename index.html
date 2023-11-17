@@ -35,19 +35,13 @@
         </form>
     
         <div class="icons">
-<<<<<<< HEAD
-            <a id= "login-btn" href="login.html" class="login-btn">Login</a>
-            <div id="menu-btn" class="fas fa-bars"></div>
+            <div id= "login-btn" ><a href="login.html" class="login-btn"><img src="https://cdn-icons-png.flaticon.com/128/2609/2609282.png"></a></div>
+            <div id= "logout-btn" class="logout-btn"><img src="https://cdn-icons-png.flaticon.com/128/1828/1828427.png"></div>
             <div id="search-btn" class="fas fa-search"></div>
-            <a href="favorite.html" class="fas fa-heart" id="save-favorite"></a>
-=======
-            <div><a href="login.html" class="login-btn">Login</a></div>
-            <div id="menu-btn" class="fas fa-bars"></div>
-            <div id="search-btn" class="fas fa-search"></div>
-            <div><a href="favroite.html" class="fas fa-heart" id="save-favorite"></a></div>
->>>>>>> 7d3d2af36fda6b5302f17f0a48de4004e97b12c4
+            <div><a href="favorite.html" class="fas fa-heart" id="save-favorite"></a></div>
             <div id="dark-mode-toggle" class="fas fa-moon"></div>
             <div id="tempUnit"> °C</div>
+            <div id="menu-btn" class="fas fa-bars"></div>
         </div>
     
     </header>
@@ -298,11 +292,7 @@
         });
       </script>
 
-<<<<<<< HEAD
     
-=======
-
->>>>>>> 7d3d2af36fda6b5302f17f0a48de4004e97b12c4
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lightgallery-js/1.4.0/js/lightgallery.min.js"></script>
@@ -310,7 +300,7 @@
     <script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
 
     <script type="module">
-        import { auth, getAuth, onAuthStateChanged, signOut } from "./firebaseConfig.js";
+        import { auth, onAuthStateChanged, signOut } from "./firebaseConfig.js";
 
         // Check if the user is logged in
         onAuthStateChanged(auth, (user) => {
@@ -325,8 +315,18 @@
             } else {
                 // User is not logged in
                 console.log("User is not logged in.");
+                document.getElementById('logout-btn').style.display = 'none';
+                document.getElementById('login-btn').style.display = 'flex';
             }
         });
+
+        document.getElementById('logout-btn').addEventListener('click', logout);
+
+        function logout() {        
+            signOut(auth)
+            console.log("User is logged in but email is not verified.");
+            document.getElementById('logout-btn').style.display = 'none';
+        }
 
 
     </script>

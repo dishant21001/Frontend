@@ -127,14 +127,23 @@ document.addEventListener("DOMContentLoaded", function() {
     }
   }
 
-  document.querySelector('#search-box').addEventListener('keypress', function(e) {
-    if (e.key === 'Enter') {
-      const location = this.value.trim();
-      fetchDataAndUpdateChart(location);
-      fetch7DayForecast(location);
-      fetchCurrentWeather(location);
-    }
-  });
+    //Autocomplete search
+    const input = document.getElementById('search-box');
+    const options = {
+        types: ['(cities)'],
+        fields: ["formatted_address", "geometry", "name"],
+        strictBounds: false,
+        };
+
+    const autocomplete = new google.maps.places.Autocomplete(input, options);
+
+    autocomplete.addListener("place_changed", () => {
+        const place = autocomplete.getPlace().name;
+        fetchCurrentWeather(place);
+        fetchDataAndUpdateChart(place);
+        fetch7DayForecast(place);
+        fetchCurrentWeather(place);
+    });
 
   fetchDataAndUpdateChart('Dallas');
 
@@ -450,20 +459,4 @@ document.addEventListener('DOMContentLoaded', function() {
           heartIcon.classList.remove('active');
       }
   }
-});
-
-//Autocomplete search
-document.addEventListener('DOMContentLoaded', () => {
-  const input = document.getElementById('search-box');
-  const options = {
-      fields: ["formatted_address", "geometry", "name"],
-      strictBounds: false,
-      };
-
-  const autocomplete = new google.maps.places.Autocomplete(input, options);
-
-  autocomplete.addListener("place_changed", () => {
-      const place = autocomplete.getPlace();
-
-  });
 });
