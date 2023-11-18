@@ -13,112 +13,110 @@
         <a href="index.html" class="logo"> <img src="Images/LOGO1.png" alt=""> </a>
     </div>
 
-<div class="register-container">
-    <h2>Create Account</h2>
-        <!-- Full Name Field -->
-        <label for="fullname">Full Name</label>
-        <input type="text" id="fullname" name="fullname" placeholder="Your Full Name" required>
-        
-        <!-- Email Field -->
-        <label for="email">Email</label>
-        <input type="email" id="email" name="email" placeholder="Your Email" required>
-        
-        <!-- Password Field -->
-        <label for="password">Password</label>
-        <input type="password" id="password" name="password" placeholder="Create a Password" required>
-        
-        <!-- Confirm Password Field -->
-        <label for="confirmpassword">Confirm Password</label>
-        <input type="password" id="confirmpassword" name="confirmpassword" placeholder="Confirm Your Password" required>
-        
-        <!-- Submit Button -->
-        <button type="button" id="SignUp">Create account</button>
-    <!-- Link to Login Page -->
-    <p>Already have an account? <a href="login.html">Log in here</a>.</p>        
-</div>
+    <form class="register-container">
+        <h2>Create Account</h2>
+            <!-- Full Name Field -->
+            <label for="fullname">Full Name</label>
+            <input type="text" id="fullname" name="fullname" placeholder="Your Full Name" required>
+            
+            <!-- Email Field -->
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="Your Email" required>
+            
+            <!-- Password Field -->
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" placeholder="Create a Password" required>
+            
+            <!-- Confirm Password Field -->
+            <label for="confirmpassword">Confirm Password</label>
+            <input type="password" id="confirmpassword" name="confirmpassword" placeholder="Confirm Your Password" required>
+            
+            <!-- Submit Button -->
+            <button type="button" id="SignUp">Create account</button>
+        <!-- Link to Login Page -->
+        <p>Already have an account? <a href="login.html">Log in here</a>.</p>        
+    </form>
 
     <script type="module">
         import { auth, database, createUserWithEmailAndPassword, sendEmailVerification, updateProfile, ref, set } from "./firebaseConfig.js";
 
-        document.getElementById('SignUp').addEventListener('click', registerUser)
-
-        // Validate input and register User
-        function registerUser() {
+        document.querySelector('form').addEventListener('submit', function(event) {
+                // Prevent the default form submission
+                event.preventDefault();
+                
+                // Get the value from the form fields
+                var fullName = document.getElementById('fullname').value;
+                var email = document.getElementById('email').value;
+                var password = document.getElementById('password').value;
+                var confirmPassword = document.getElementById('confirmpassword').value;
             
-            // Get the value from the form fields
-            var fullName = document.getElementById('fullname').value;
-            var email = document.getElementById('email').value;
-            var password = document.getElementById('password').value;
-            var confirmPassword = document.getElementById('confirmpassword').value;
-        
-            // Regular expressions for validation
-            var nameRegex = /^[a-zA-Z\s]+$/;
-            var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                // Regular expressions for validation
+                var nameRegex = /^[a-zA-Z\s]+$/;
+                var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-            // Validate Full Name
-            if (!nameRegex.test(fullName)) {
-                alert('Please enter a valid full name.');
-                return;
-            }
-
-            // Validate Email
-            if (!emailRegex.test(email)) {
-                alert('Please enter a valid email address.');
-                return;
-            }
-
-            // Validate Repeat Password
-            if (password !== confirmPassword) {
-                alert('Passwords do not match.');
-                return;
-            }
-
-            //Create User with Email and Password
-            createUserWithEmailAndPassword(auth, email, password)
-                .then((userCredential) => {
-                    const user = userCredential.user;
-                    const userId = auth.currentUser.uid;
-                    
-                    set(ref(database, 'users/' + userId), {
-                        username: fullName,
-                        email: email,
-                        location: "",
-                    })
-
-                    // Update user profile
-                    updateProfile(user, { displayName: fullName})
-                        .then(() => {
-                            // Send email verification
-                            sendEmailVerification(user)
-                                .then(() => {
-                                    window.location.href = 'confirm.html';
-                                })
-                                .catch((verificationError) => {
-                                    console.error("Error sending verification email:", verificationError);
-                                })
-                        })
-                        .catch((profileError) => {
-                            console.error("Error updating user profile:", profileError);
-                        })
-
-                })
-                .catch((error) => {
-                    const errorCode = error.code;
-                    const errorMessage = error.message;
-
-                    switch (errorCode) {
-                    case 'auth/weak-password':
-                        alert('The password is too weak. Please choose a stronger password.');
-                        break;
-                    case 'auth/email-already-in-use':
-                        alert('The email address is already in use by another account.');
-                        break;
-                    default:
-                        alert(`Registration failed: ${errorMessage}`);
+                // Validate Full Name
+                if (!nameRegex.test(fullName)) {
+                    alert('Please enter a valid full name.');
+                    return;
                 }
-                });
 
-        }
+                // Validate Email
+                if (!emailRegex.test(email)) {
+                    alert('Please enter a valid email address.');
+                    return;
+                }
+
+                // Validate Repeat Password
+                if (password !== confirmPassword) {
+                    alert('Passwords do not match.');
+                    return;
+                }
+
+                //Create User with Email and Password
+                createUserWithEmailAndPassword(auth, email, password)
+                    .then((userCredential) => {
+                        const user = userCredential.user;
+                        const userId = auth.currentUser.uid;
+                        
+                        set(ref(database, 'users/' + userId), {
+                            username: fullName,
+                            email: email,
+                            location: "",
+                        })
+
+                        // Update user profile
+                        updateProfile(user, { displayName: fullName})
+                            .then(() => {
+                                // Send email verification
+                                sendEmailVerification(user)
+                                    .then(() => {
+                                        window.location.href = 'confirm.html';
+                                    })
+                                    .catch((verificationError) => {
+                                        console.error("Error sending verification email:", verificationError);
+                                    })
+                            })
+                            .catch((profileError) => {
+                                console.error("Error updating user profile:", profileError);
+                            })
+
+                    })
+                    .catch((error) => {
+                        const errorCode = error.code;
+                        const errorMessage = error.message;
+
+                        switch (errorCode) {
+                        case 'auth/weak-password':
+                            alert('The password is too weak. Please choose a stronger password.');
+                            break;
+                        case 'auth/email-already-in-use':
+                            alert('The email address is already in use by another account.');
+                            break;
+                        default:
+                            alert(`Registration failed: ${errorMessage}`);
+                    }
+                    });
+            });
     </script>
 
 </body>

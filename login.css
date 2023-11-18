@@ -80,6 +80,14 @@ h1{
     text-align: center;
 }
 
+#login-form .forgot{
+    width: 100%;
+    height: fit-content;
+    font-size: small;
+    margin-left: 90px;
+    margin-bottom: 10px;
+}
+
 label{
     display: block;
     text-align: left;
@@ -94,13 +102,13 @@ label .required {
 input{
     width: 90%;
     padding: 10px;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
     border: 1px solid #ccc;
     border-radius: 3px;
 }
 
 button{
-    width: 90%;
+    width: 95%;
     padding: 10px;
     color: #fff;
     border: none;
@@ -114,4 +122,8 @@ button{
 
 button:hover{
     background-position: right center;
+}
+
+p {
+    margin-left: 10px;
 }

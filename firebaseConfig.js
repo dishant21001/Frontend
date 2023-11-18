@@ -1,5 +1,5 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.6.0/firebase-app.js";
-import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut, createUserWithEmailAndPassword, sendEmailVerification, updateProfile } from "https://www.gstatic.com/firebasejs/10.6.0/firebase-auth.js";
+import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut, createUserWithEmailAndPassword, sendEmailVerification, sendPasswordResetEmail, updateProfile } from "https://www.gstatic.com/firebasejs/10.6.0/firebase-auth.js";
 import { getDatabase, ref, push, onValue, get, set, orderByChild, query, equalTo, remove  } from "https://www.gstatic.com/firebasejs/10.6.0/firebase-database.js";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -24,5 +24,5 @@ const database = getDatabase(app);
 
 export { app, auth, database, signInWithEmailAndPassword ,onAuthStateChanged, ref,
     set, push, onValue, get, signOut, createUserWithEmailAndPassword, sendEmailVerification,
-    updateProfile, orderByChild, query, equalTo, remove
+    updateProfile, orderByChild, query, equalTo, remove, sendPasswordResetEmail
    };

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login Form</title>
+    <link rel="stylesheet" href="register.css">
+</head>
+<body>
+
+    <!-- App bar -->
+    <div class="header">
+        <a href="index.html" class="logo"> <img src="Images/LOGO1.png" alt=""> </a>
+    </div>
+
+    <form class="register-container">
+        <h2>Account Information</h2>      
+            <!-- Email Field -->
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="Your Email" required>
+            
+            <!-- Submit Button -->
+            <button type="submit" id="submit">Submit</button>
+        <!-- Link to Login Page -->
+        <p>Already have an account? <a href="login.html">Log in here</a>.</p>        
+    </form>
+    
+
+
+        <script type="module">
+            import { auth, sendPasswordResetEmail } from "./firebaseConfig.js";
+            
+            document.querySelector('form').addEventListener('submit', function(event) {
+                // Prevent the default form submission
+                event.preventDefault();
+
+                var email = document.getElementById('email').value;
+
+                sendPasswordResetEmail(auth, email)
+                    .then(() => {
+                        window.location.href = "login.html";
+                    })
+                    .catch((error) => {
+                        console.error(error.message);
+                    })
+            });
+            
+        </script>
+
+</body>
+</html>
