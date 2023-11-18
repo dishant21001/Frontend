@@ -1,3 +1,4 @@
+
 # WeatherBrainiac App
 
 This Weather App provides various features to display weather data, including a homepage, login functionality, weather maps, user feedback, monthly forecasts, and saved locations.
@@ -9,6 +10,7 @@ git clone https://github.com/MM0199/Weather-Brainiac.git
 
 2. **Run the Application:**
 - Open the `index.html` file in a web browser to access the homepage UI.
+- If running in VS Code, download the extension "Live Server" for easy access to the web application. 
 
 3. **Navigation:**
 - From the homepage (`index.html`), you can navigate to other pages using the following links:
