@@ -1,4 +1,4 @@
-# Weather App
+# WeatherBrainiac App
 
 This Weather App provides various features to display weather data, including a homepage, login functionality, weather maps, user feedback, monthly forecasts, and saved locations.
 
@@ -31,4 +31,4 @@ cd weather-app
 5. **Accessing Favorite Page:**
 - After logging in, return to the [index.html](index.html) and click on the "Favorite" link to access the UI for the user's saved locations.
 
-6. **Enjoy exploring the Weather App!**
+6. **Enjoy exploring the WeatherBrainiac App!**
