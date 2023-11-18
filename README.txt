@@ -6,7 +6,6 @@ This Weather App provides various features to display weather data, including a 
 
 1. **Clone the Repository:**
 git clone https://github.com/MM0199/Weather-Brainiac.git
-cd weather-app
 
 2. **Run the Application:**
 - Open the `index.html` file in a web browser to access the homepage UI.
