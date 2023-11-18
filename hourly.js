@@ -128,3 +128,15 @@ fetchWeatherData('Dallas'); // Replace with the default location you want
 
 
 
+window.onload = function() {
+    const body = document.body;
+    
+    // Check if 'dark-mode' class is in localStorage
+    if (localStorage.getItem('darkMode') === 'true') {
+      body.classList.add('dark-mode');
+      console.log("enable")
+    } else {
+      body.classList.remove('dark-mode');
+      console.log("disable")
+    }
+  }
