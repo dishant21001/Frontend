@@ -124,3 +124,16 @@ const homeButton = document.getElementById('home-button');
         // Option 1: Navigate to the homepage or any other URL
         window.location.href = '/'; // Assuming the root is your homepage
     });
+
+    window.onload = function() {
+        const body = document.body;
+        
+        // Check if 'dark-mode' class is in localStorage
+        if (localStorage.getItem('darkMode') === 'true') {
+          body.classList.add('dark-mode');
+          console.log("enable")
+        } else {
+          body.classList.remove('dark-mode');
+          console.log("disable")
+        }
+      }

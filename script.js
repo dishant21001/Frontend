@@ -21,6 +21,20 @@ window.onscroll = () => {
 
 
 // Add this inside your script tag or a JavaScript file
+ // When the page loads, check if the user has a saved preference and apply it
+ window.onload = function() {
+  const body = document.body;
+  
+  // Check if 'dark-mode' class is in localStorage
+  if (localStorage.getItem('darkMode') === 'true') {
+    body.classList.add('dark-mode');
+  } else {
+    body.classList.remove('dark-mode');
+  }
+}
+console.log(localStorage.getItem('darkMode'))
+
+// Function to toggle dark mode
 function toggleDarkMode() {
   const body = document.body;
   const darkModeToggle = document.getElementById('dark-mode-toggle');
@@ -30,14 +44,28 @@ function toggleDarkMode() {
   
   // Change the icon or text of the dark mode toggle button accordingly
   if (body.classList.contains('dark-mode')) {
+    if (darkModeToggle) {
       darkModeToggle.classList.replace('fa-moon', 'fa-sun');
+    }
+    // Save the user's preference to localStorage
+    localStorage.setItem('darkMode', 'true');
+    //console.log(localStorage.getItem('darkMode')) //debug
+    
   } else {
+    if (darkModeToggle) {
       darkModeToggle.classList.replace('fa-sun', 'fa-moon');
+    }
+    // Save the user's preference to localStorage
+    localStorage.setItem('darkMode', 'false');
   }
 }
 
 // Attach the event listener to the dark mode toggle button
-document.getElementById('dark-mode-toggle').addEventListener('click', toggleDarkMode);
+if (document.getElementById('dark-mode-toggle')) {
+  document.getElementById('dark-mode-toggle').addEventListener('click', toggleDarkMode);
+  
+}
+
 
 
 
@@ -188,7 +216,7 @@ function fetchCurrentWeather(location) {
         document.getElementById('weather-temperature').textContent = `${isFmode ? data.current.temp_f : data.current.temp_c}°${isFmode ? 'F' : 'C' }` ;
         document.getElementById('weather-condition').textContent = data.current.condition.text;
         document.getElementById('weather-humidity').textContent = data.current.humidity;
-        document.getElementById('weather-wind').textContent = data.current.wind_kph;
+        document.getElementById('weather-wind').textContent = `${data.current.wind_kph} km/h`;
         document.getElementById('detail-wind').textContent = `${data.current.wind_kph} km/h, ${data.current.wind_dir}`;
         document.getElementById('detail-humidity').textContent = `${data.current.humidity}%`;
         document.getElementById('detail-feelslike').textContent = `${ isFmode ? data.current.feelslike_f :
