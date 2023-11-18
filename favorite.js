@@ -316,4 +316,3 @@ function deleteLocationByName(userId, locationName) {
         console.error('Error querying location:', error);
     });
   }
-

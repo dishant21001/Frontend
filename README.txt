@@ -1,12 +1,11 @@
-# Weather App
+# WeatherBrainiac App
 
 This Weather App provides various features to display weather data, including a homepage, login functionality, weather maps, user feedback, monthly forecasts, and saved locations.
 
 ## Instructions
 
 1. **Clone the Repository:**
-git clone https://github.com/yourusername/weather-app.git
-cd weather-app
+git clone https://github.com/MM0199/Weather-Brainiac.git
 
 2. **Run the Application:**
 - Open the `index.html` file in a web browser to access the homepage UI.
@@ -31,4 +30,4 @@ cd weather-app
 5. **Accessing Favorite Page:**
 - After logging in, return to the [index.html](index.html) and click on the "Favorite" link to access the UI for the user's saved locations.
 
-6. **Enjoy exploring the Weather App!**
+6. **Enjoy exploring the WeatherBrainiac App!**

@@ -93,3 +93,5 @@ document.getElementById('search-box').addEventListener('change', (event) => {
                     </div>
                     <!-- Repeat the above structure for the remaining 8 days -->
                     </div>
+
+
