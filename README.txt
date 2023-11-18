@@ -18,6 +18,8 @@ cd weather-app
   - [Feedback](Feedback.html): The UI for users to give feedback.
   - [Monthly](Monthly.html): The UI for displaying monthly forecasts.
   - [Favorite](Favorite.html): The UI for a user's saved locations. (Note: Requires login)
+  - [About Us](about_us.html): The UI for User's to understand who created the project and what our mission is.
+  - [Services](services.html): The UI for User's to look at what services our website offers. 
 
 4. **Login (if necessary):**
 - If the user is not logged in, they will not be able to access the [Favorite](Favorite.html) page. To log in:
