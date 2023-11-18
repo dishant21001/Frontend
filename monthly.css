@@ -1,22 +1,30 @@
 body {
   font-family: Arial, sans-serif;
   background-image: url(./Images/344403.jpg);
-  background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
 }
 
 .header{
-padding:1.5rem 9%;
-background-color: rgba(86, 235, 255, 0.4);
+  overflow: hidden;
+  background-color: #007BFF;
+  background-size: 100%;
+  background-position: center;
+  background-repeat:no-repeat;
+  height: 80px;
+  width: 100%;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  padding-top: 0;
+}
 
-box-shadow: 0 .5rem 1rem rgba(0,0,0,.1);
-display: flex;
-align-items: center;
-justify-content: center;
-position: relative;
-top:0; left:0; right:0;
-z-index: 1000;
+.header .logo{
+  height: 100%;
+  margin-left: 120px;
+  display: flex;
+  align-items: center;
+}
 
 .logo img{
   height: 70%;
@@ -62,7 +70,7 @@ strong {
 }
 
 table#monthlyForecast thead {
-  background-color: rgba(127, 231, 0, 0.3); /* Slight white transparency */
+  background-color: rgba(255, 255, 255, 0.3); /* Slight white transparency */
 }
 
 .dropdown {
@@ -72,7 +80,7 @@ table#monthlyForecast thead {
 
   &__face,
   &__items {
-    background-color: #fce4ad;
+    background-color: #fff;
     padding: 20px;
     border-radius: 25px;
   }
@@ -157,13 +165,3 @@ table#monthlyForecast thead {
   transform: scale(0.98); /* Slightly shrink the button when clicked */
 }
 
-.dark-mode
-{
-  
-    background-image: url(./Images/nightSky.jpeg);
-    
-}
-.dark-mode .header{
-  background-color: rgba(127, 115, 195, 0);
-    
-}
