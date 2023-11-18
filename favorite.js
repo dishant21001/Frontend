@@ -65,6 +65,7 @@ let handlerData = new Promise((resolve, reject) => {
                                 const data = await response.json();
                                 // Extract relevant weather information from the API response
                                 const locationName = data.location.name;
+                                const currentTemp = data.current.temp_f;
                                 const windSpeed = data.current.wind_kph;
                                 const humidity = data.current.humidity;
                                 const sunrise = data.forecast.forecastday[0].astro.sunrise;
@@ -86,6 +87,7 @@ let handlerData = new Promise((resolve, reject) => {
                                 // Store the information in the weatherInformation object
                                 weatherInformation[city] = {
                                     locationName,
+                                    currentTemp,
                                     windSpeed,
                                     humidity,
                                     sunrise,
@@ -134,9 +136,18 @@ async function displayData(){
                 placeContainer.classList.add('place-container');
                 let placeDesc = document.createElement('div');
                 placeDesc.classList.add('place-desc');
+
+                const descContainer = document.createElement('div');
+                descContainer.classList.add('temp-container');
                 
                 const place = document.createElement('h1');
                 place.textContent = data.locationName;
+
+                const currentTemp = document.createElement('h3');
+                currentTemp.textContent = data.currentTemp + "°F";
+
+                descContainer.appendChild(place);
+                descContainer.appendChild(currentTemp);
         
                 const windContainer = document.createElement('div');
                 windContainer.classList.add('icon-container');
@@ -241,7 +252,7 @@ async function displayData(){
                 });
                 deleteIcon.src = "https://cdn-icons-png.flaticon.com/128/1828/1828843.png";
         
-                placeDesc.appendChild(place);
+                placeDesc.appendChild(descContainer);
                 placeDesc.appendChild(windContainer);
                 placeDesc.appendChild(humidityContainer);
                 placeDesc.appendChild(sunriseContainer);
@@ -305,4 +316,3 @@ function deleteLocationByName(userId, locationName) {
         console.error('Error querying location:', error);
     });
   }
-
