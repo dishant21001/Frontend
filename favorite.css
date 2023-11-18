@@ -131,18 +131,34 @@ body
 .icon-container{
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
 }
 
 .icon-container img {
+    margin-right: 20px;
     height: 25px;
     width: 25px;
     margin-bottom: 0%;
 }
 
+.temp-container{
+    height: fit-content;
+    width: 176px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.temp-container h3{
+    margin-top: 0%;
+    color: rgb(39, 36, 36);
+}
+
 .place-desc h1 {
     width: 176px;
+    margin-bottom: 0%;
 }
 
 .place-desc h2 {

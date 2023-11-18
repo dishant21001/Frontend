@@ -1,4 +1,4 @@
-import { auth, database, onAuthStateChanged, ref, push, onValue, get, orderByChild, query, equalTo, remove } from "./firebaseConfig.js";
+import { auth, database, onAuthStateChanged, ref, push, onValue, get, remove } from "./firebaseConfig.js";
 
 //Autocomplete
 let handlerData = new Promise((resolve, reject) => {
@@ -8,7 +8,46 @@ let handlerData = new Promise((resolve, reject) => {
             let locationValues;
             if (user) {
                 const userId = user.uid;
-    
+
+                const input = document.getElementById('search-input');
+                        const options = {
+                            types: ['(cities)'],
+                            fields: ["formatted_address", "geometry", "name"],
+                            strictBounds: false,
+                        };
+                const autocomplete = new google.maps.places.Autocomplete(input, options);
+        
+                autocomplete.addListener("place_changed", async () => {
+                    const place = autocomplete.getPlace().name;
+                
+                    // Reference to the user's location node
+                    const locationRef = ref(database, 'users/' + userId + '/location');
+                
+                    // Check if the location already exists
+                    get(locationRef)
+                        .then((snapshot) => {
+                            const existingLocations = snapshot.val();
+                
+                            if (existingLocations && Object.values(existingLocations).includes(place)) {
+                                console.log('Location already exists for this user.');
+                            } else {
+                                // Add the new location to the user's locations
+                                push(locationRef, place)
+                                    .then(() => {
+                                        console.log('Location added successfully');
+                                        location.reload();
+                                    })
+                                    .catch((error) => {
+                                        console.log('Error adding location:', error);
+                                    });
+                            }
+                        })
+                        .catch((error) => {
+                            console.log('Error checking existing locations:', error);
+                            resolve(weatherInformation);
+                        });
+                });
+
                 // Retrieve location from Firebase
                 onValue(ref(database, 'users/'+ userId + '/location'), (snapshot) => {
                     if (snapshot.exists()) {
@@ -26,6 +65,7 @@ let handlerData = new Promise((resolve, reject) => {
                                 const data = await response.json();
                                 // Extract relevant weather information from the API response
                                 const locationName = data.location.name;
+                                const currentTemp = data.current.temp_f;
                                 const windSpeed = data.current.wind_kph;
                                 const humidity = data.current.humidity;
                                 const sunrise = data.forecast.forecastday[0].astro.sunrise;
@@ -47,6 +87,7 @@ let handlerData = new Promise((resolve, reject) => {
                                 // Store the information in the weatherInformation object
                                 weatherInformation[city] = {
                                     locationName,
+                                    currentTemp,
                                     windSpeed,
                                     humidity,
                                     sunrise,
@@ -67,46 +108,6 @@ let handlerData = new Promise((resolve, reject) => {
                             .catch(error => {
                                 reject(error);
                             });
-        
-                        const input = document.getElementById('search-input');
-                        const options = {
-                            types: ['(cities)'],
-                            fields: ["formatted_address", "geometry", "name"],
-                            strictBounds: false,
-                        };
-        
-                        const autocomplete = new google.maps.places.Autocomplete(input, options);
-        
-                        autocomplete.addListener("place_changed", () => {
-                            const place = autocomplete.getPlace().name;
-                        
-                            // Reference to the user's location node
-                            const locationRef = ref(database, 'users/' + userId + '/location');
-                        
-                            // Check if the location already exists
-                            get(locationRef)
-                                .then((snapshot) => {
-                                    const existingLocations = snapshot.val();
-                        
-                                    if (existingLocations && Object.values(existingLocations).includes(place)) {
-                                        console.log('Location already exists for this user.');
-                                    } else {
-                                        // Add the new location to the user's locations
-                                        push(locationRef, place)
-                                            .then(() => {
-                                                console.log('Location added successfully');
-                                                location.reload();
-                                            })
-                                            .catch((error) => {
-                                                console.log('Error adding location:', error);
-                                            });
-                                    }
-                                })
-                                .catch((error) => {
-                                    console.log('Error checking existing locations:', error);
-                                    resolve(weatherInformation);
-                                });
-                        });
     
                     } else {
                         console.log('User has no locations');
@@ -135,9 +136,18 @@ async function displayData(){
                 placeContainer.classList.add('place-container');
                 let placeDesc = document.createElement('div');
                 placeDesc.classList.add('place-desc');
+
+                const descContainer = document.createElement('div');
+                descContainer.classList.add('temp-container');
                 
                 const place = document.createElement('h1');
                 place.textContent = data.locationName;
+
+                const currentTemp = document.createElement('h3');
+                currentTemp.textContent = data.currentTemp + "°F";
+
+                descContainer.appendChild(place);
+                descContainer.appendChild(currentTemp);
         
                 const windContainer = document.createElement('div');
                 windContainer.classList.add('icon-container');
@@ -242,7 +252,7 @@ async function displayData(){
                 });
                 deleteIcon.src = "https://cdn-icons-png.flaticon.com/128/1828/1828843.png";
         
-                placeDesc.appendChild(place);
+                placeDesc.appendChild(descContainer);
                 placeDesc.appendChild(windContainer);
                 placeDesc.appendChild(humidityContainer);
                 placeDesc.appendChild(sunriseContainer);
