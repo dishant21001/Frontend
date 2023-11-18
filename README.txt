@@ -5,7 +5,7 @@ This Weather App provides various features to display weather data, including a 
 ## Instructions
 
 1. **Clone the Repository:**
-git clone https://github.com/yourusername/weather-app.git
+git clone https://github.com/MM0199/Weather-Brainiac.git
 cd weather-app
 
 2. **Run the Application:**
