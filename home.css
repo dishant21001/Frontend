@@ -58,6 +58,7 @@
   color: white; /* Light text color for contrast */
 }
 
+/*Some of darkmode(Huy)*/
 .dark-mode .subheading,
 .dark-mode .weather-section,
 .dark-mode .current-weather,
@@ -244,7 +245,8 @@ section {
           width: 90%;
         }
       }
-
+      
+      /*Huy*/
       .icons{
         display: flex;
         

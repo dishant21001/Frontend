@@ -67,7 +67,7 @@ function updateHourlyForecast(data) {
     for (let i = 0; i < 24; i++) {
         const hourData = data.forecast.forecastday[0].hour[i];
         const time = new Date(hourData.time).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-        const temperature = `${isFmode ? hourData.temp_f : hourData.temp_c}`;
+        const temperature = `${isFmode ? hourData.temp_f : hourData.temp_c}`; //huy
         const condition = hourData.condition.text;
         const iconUrl = `https:${hourData.condition.icon}`;
         const feelsLike = `${isFmode ? hourData.feelslike_f : hourData.feelslike_c}`;
@@ -127,7 +127,7 @@ fetchWeatherData('Dallas'); // Replace with the default location you want
 
 
 
-
+//Huy
 window.onload = function() {
     const body = document.body;
     

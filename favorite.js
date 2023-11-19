@@ -325,6 +325,7 @@ function deleteLocationByName(userId, locationName) {
     });
   }
 
+  //Huy
   window.onload = function() {
     const body = document.body;
     

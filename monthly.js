@@ -119,10 +119,10 @@ function fetchMonthlyWeatherData(month, year, callback) {
         });
 }
 
- window.onload = function() {
+ window.onload = function() { 
     const body = document.body;
     
-    // Check if 'dark-mode' class is in localStorage
+    // Check if 'dark-mode' class is in localStorage(Huy)
     if (localStorage.getItem('darkMode') === 'true') {
       body.classList.add('dark-mode');
       console.log("enable")

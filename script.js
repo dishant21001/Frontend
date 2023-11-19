@@ -34,7 +34,7 @@ setTimeout(function() {
 
 // Add this inside your script tag or a JavaScript file
  // When the page loads, check if the user has a saved preference and apply it
- let isFmode;
+ let isFmode; //Huy
  window.onload = function() {
   const body = document.body;
   
@@ -293,7 +293,7 @@ function fetch7DayForecast(location) {
         forecastDayElem.innerHTML = `
           <h3>${new Date(day.date).toLocaleDateString('en-US', { weekday: 'long' })}</h3>
           <p>High: ${isFmode ? day.day.maxtemp_f : day.day.maxtemp_c}°${isFmode ? 'F' : 'C'}</p>
-          <p>Low: ${isFmode ? day.day.mintemp_f : day.day.mintemp_c}°${isFmode ? 'F' : 'C'}</p>
+          <p>Low: ${isFmode ? day.day.mintemp_f : day.day.mintemp_c}°${isFmode ? 'F' : 'C'}</p>//Huy
           <p>Condition: ${day.day.condition.text}</p>
         `;
         forecastGrid.appendChild(forecastDayElem);
