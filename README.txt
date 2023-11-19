@@ -33,3 +33,12 @@ git clone https://github.com/MM0199/Weather-Brainiac.git
 - After logging in, return to the [index.html](index.html) and click on the "Favorite" link to access the UI for the user's saved locations.
 
 6. **Enjoy exploring the WeatherBrainiac App!**
+
+7. **Each team member and the test cases they worked on, along with the files regarding them, are listed below:**
+
+Dishant:
+Rithik:
+Huy:
+Phuong:
+Jonathan:
+Gabrielle: 

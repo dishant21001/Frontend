@@ -1,3 +1,6 @@
+// all names regarding code completion are in README.txt file 
+// as most files are collaborative
+
 // Utility function to get the number of days in a month
 function getDaysInMonth(month, year) {
     return new Date(year, month, 0).getDate();
@@ -5,38 +8,38 @@ function getDaysInMonth(month, year) {
 const monthlyWeatherData = [
     { day: 1, condition: "Sunny", temperature: 25 },
     { day: 2, condition: "Cloudy", temperature: 22 },
-    { day: 3, condition: "Sunny", temperature: 25 },
-    { day: 4, condition: "Cloudy", temperature: 22 },
+    { day: 3, condition: "Sunny", temperature: 23 },
+    { day: 4, condition: "Cloudy", temperature: 24 },
     { day: 5, condition: "Sunny", temperature: 25 },
-    { day: 6, condition: "Cloudy", temperature: 22 },
+    { day: 6, condition: "Cloudy", temperature: 20 },
     { day: 7, condition: "Sunny", temperature: 25 },
     { day: 8, condition: "Cloudy", temperature: 22 },
-    { day: 9, condition: "Sunny", temperature: 25 },
-    { day: 10, condition: "Cloudy", temperature: 22 },
+    { day: 9, condition: "Sunny", temperature: 28 },
+    { day: 10, condition: "Cloudy", temperature: 23 },
     { day: 11, condition: "Sunny", temperature: 25 },
     { day: 12, condition: "Cloudy", temperature: 22 },
     { day: 13, condition: "Sunny", temperature: 25 },
     { day: 14, condition: "Cloudy", temperature: 22 },
-    { day: 15, condition: "Sunny", temperature: 25 },
+    { day: 15, condition: "Sunny", temperature: 23 },
     { day: 16, condition: "Cloudy", temperature: 22 },
-    { day: 17, condition: "Sunny", temperature: 25 },
+    { day: 17, condition: "Sunny", temperature: 21 },
     { day: 18, condition: "Cloudy", temperature: 22 },
     { day: 19, condition: "Sunny", temperature: 25 },
-    { day: 20, condition: "Cloudy", temperature: 22 },
+    { day: 20, condition: "Cloudy", temperature: 20 },
     { day: 21, condition: "Sunny", temperature: 25 },
     { day: 22, condition: "Cloudy", temperature: 22 },
     { day: 23, condition: "Sunny", temperature: 25 },
-    { day: 24, condition: "Cloudy", temperature: 22 },
+    { day: 24, condition: "Cloudy", temperature: 18 },
     { day: 25, condition: "Sunny", temperature: 25 },
     { day: 26, condition: "Cloudy", temperature: 22 },
     { day: 27, condition: "Sunny", temperature: 25 },
-    { day: 28, condition: "Cloudy", temperature: 22 },
+    { day: 28, condition: "Cloudy", temperature: 26 },
     { day: 29, condition: "Sunny", temperature: 25 },
     { day: 30, condition: "Cloudy", temperature: 22 },
     { day: 31, condition: "Cloudy", temperature: 22 },
 ];
 
-
+let isFmode;
 function fillMonthlyForecast(month, year) {
     const tbody = document.querySelector("#monthlyForecast tbody");
     
@@ -118,6 +121,26 @@ function fetchMonthlyWeatherData(month, year, callback) {
             alert("Error fetching weather data");
         });
 }
+
+ window.onload = function() { 
+    const body = document.body;
+    
+    // Check if 'dark-mode' class is in localStorage(Huy)
+    if (localStorage.getItem('darkMode') === 'true') {
+      body.classList.add('dark-mode');
+      console.log("enable")
+    } else {
+      body.classList.remove('dark-mode');
+      console.log("disable")
+    }
+
+    // Check if 'Fmode' is true
+    if(localStorage.getItem('Fmode') === 'true') {
+        Fmode = true;
+    } else {
+        Fmode = false;
+    } 
+  }
 
 const homeButton = document.getElementById('home-button');
     homeButton.addEventListener('click', function() {
