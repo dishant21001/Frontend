@@ -38,7 +38,7 @@ git clone https://github.com/MM0199/Weather-Brainiac.git
 
 Dishant: index.html, home.css, script.js, hourly.html, hourly.css, hourly.js, monthly.html, monthly.css, monthly.js, maps,html, maps.css, maps.js, feedback.html, feedback.css, newletter.html.
 Rithik: index.html, home.css, monthly.html, monthly.js, about_us.html, services.html, newsletter.html, 
-Huy:
+Huy: index.html, home.css, script.js, hourly.css, hourly.js, monthly.js, monthly.css, feedback.css, favorite.css, favorite.js
 Phuong: index.html, login.html, register.html, reset.html, favorite.html, favorite.css, favorite.js, firebaseConfig.js, home.css, login.css, register.css, script.js.
 Jonathan:
 Gabrielle: 
