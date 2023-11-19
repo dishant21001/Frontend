@@ -62,7 +62,7 @@ setTimeout(function() {
   fetchDataAndUpdateChart('Dallas');
 }
 
-// Function to toggle dark mode
+// Function to toggle dark mode(huy)
 function toggleDarkMode() {
   const body = document.body;
   const darkModeToggle = document.getElementById('dark-mode-toggle');
@@ -95,7 +95,7 @@ if (document.getElementById('dark-mode-toggle')) {
 }
 
 
- //Convert Celius to F button
+ //Convert Celius to F button(Huy)
  const toggleUnit = () => {
    // Write your code to manipulate the DOM here
 
@@ -119,12 +119,11 @@ if (document.getElementById('dark-mode-toggle')) {
     */
   }
      
- //update location when search
+ //update location when search(Huy)
  document.querySelector('#search-box').addEventListener('keypress', function(e) {
   if (e.key === 'Enter') {
       subLocation = this.value
 
-      
   }
 });
 
@@ -190,7 +189,7 @@ function fetchDataAndUpdateChart(location) {
           labels: ["00:00", "1:00", "2:00", "3:00", "4:00", "5:00", "6:00", "7:00", "08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00",
                    "17:00", "18:00", "19:00", "20:00", "21:00", "22:00", "23:00"], // The hours
           datasets: [{
-              label: `${isFmode ? "Temperature (°F)" : "Temperature (°C)"}`,
+              label: `${isFmode ? "Temperature (°F)" : "Temperature (°C)"}`,//Huy
               data: [], // Initialize empty data array
               backgroundColor: 'rgba(255, 99, 132, 0.2)',
               borderColor: 'rgba(255, 99, 132, 1)',
@@ -238,7 +237,7 @@ function fetchCurrentWeather(location) {
     .then(data => {
       if (data && data.current) {
         document.getElementById('weather-location').textContent = location;
-        document.getElementById('weather-temperature').textContent = `${isFmode ? data.current.temp_f : data.current.temp_c}°${isFmode ? 'F' : 'C' }` ;
+        document.getElementById('weather-temperature').textContent = `${isFmode ? data.current.temp_f : data.current.temp_c}°${isFmode ? 'F' : 'C' }` ;//Huy
         document.getElementById('weather-condition').textContent = data.current.condition.text;
         document.getElementById('weather-humidity').textContent = data.current.humidity;
         document.getElementById('weather-wind').textContent = `${data.current.wind_kph} km/h`;
