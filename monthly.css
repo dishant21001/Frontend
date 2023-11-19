@@ -164,3 +164,10 @@ table#monthlyForecast thead {
 #home-button:active {
   transform: scale(0.98); /* Slightly shrink the button when clicked */
 }
+
+.dark-mode , .dark-mode .header /*Huy*/
+{
+    color: rgb(22, 59, 112);
+    background-image: url(./Images/nightSky.jpeg);
+    
+}

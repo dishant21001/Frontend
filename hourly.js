@@ -58,7 +58,7 @@ function fetchWeatherData(location) {
         console.error(`Could not fetch weather data: ${error}`);
     });
 }
-
+let isFmode;
 // This function updates the hourly forecast HTML
 function updateHourlyForecast(data) {
     const hourlyForecastContainer = document.querySelector('.hourly-forecast');
@@ -67,10 +67,10 @@ function updateHourlyForecast(data) {
     for (let i = 0; i < 24; i++) {
         const hourData = data.forecast.forecastday[0].hour[i];
         const time = new Date(hourData.time).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-        const temperature = hourData.temp_c;
+        const temperature = `${isFmode ? hourData.temp_f : hourData.temp_c}`; //huy
         const condition = hourData.condition.text;
         const iconUrl = `https:${hourData.condition.icon}`;
-        const feelsLike = hourData.feelslike_c;
+        const feelsLike = `${isFmode ? hourData.feelslike_f : hourData.feelslike_c}`;
         const humidity = hourData.humidity;
         const pressure = hourData.pressure_mb;
         const wind = hourData.wind_kph;
@@ -80,13 +80,13 @@ function updateHourlyForecast(data) {
         hourBox.className = 'hour-box';
         hourBox.innerHTML = `
             <div class="hour-time">${time}</div>
-            <div class="hour-temp">${temperature}°C</div>
+            <div class="hour-temp">${temperature} ${isFmode? "°F" : "°C"}</div>
             <img src="${iconUrl}" alt="${condition}" class="weather-icon">
             <div class="hour-condition">${condition}</div>
             <div class="hour-rain">Rain: ${chanceOfRain}%</div> <!-- Display chance of rain -->
             <button class="dropdown-btn"></button>
             <div class="dropdown-content">
-                <p>Feels Like: ${feelsLike}°C</p>
+                <p>Feels Like: ${feelsLike} ${isFmode? "°F" : "°C"}</p>
                 <p>Humidity: ${humidity}%</p>
                 <p>Pressure: ${pressure} mb</p>
                 <p>Wind: ${wind} km/h</p>
@@ -127,7 +127,7 @@ fetchWeatherData('Dallas'); // Replace with the default location you want
 
 
 
-
+//Huy
 window.onload = function() {
     const body = document.body;
     
@@ -139,4 +139,12 @@ window.onload = function() {
       body.classList.remove('dark-mode');
       console.log("disable")
     }
+
+    // Check if 'Fmode' is true
+    if(localStorage.getItem('Fmode') === 'true') {
+        isFmode = true;
+    } else {
+        isFmode = false;
+    } 
+    
   }

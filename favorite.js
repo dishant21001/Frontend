@@ -38,7 +38,46 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
-//Autocomplete
+// Hide content initially when the page is loaded (Phuong)
+document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('header').style.display = 'none';
+    document.getElementById('search').style.display = 'none';
+    window.onload = function() {
+        // Show loading overlay
+        document.getElementById('loadingOverlay').style.display = 'flex';
+    
+        // Simulate a longer loading time (adjust the duration as needed)
+        setTimeout(function() {
+            // Hide loading overlay after the simulated loading time
+            document.getElementById('loadingOverlay').style.display = 'none';
+        }, 1000); // 1000 milliseconds (1 seconds) - Adjust the duration as needed
+    
+        const body = document.body;
+    
+        // Check if 'dark-mode' class is in localStorage (Huy)
+        if (localStorage.getItem('darkMode') === 'true') {
+            body.classList.add('dark-mode');
+            body.classList.remove('light-mode');
+            //console.log("enable")
+        } else {
+            body.classList.add('light-mode');
+            body.classList.remove('dark-mode');
+            //console.log("disable")
+        }
+        
+        // Check if 'Fmode' is true (Phuong)
+        if(localStorage.getItem('Fmode') === 'true') {
+            Fmode = true;
+        } else {
+            Fmode = false;
+        } 
+        document.getElementById('header').style.display = 'flex';
+        document.getElementById('search').style.display = 'flex';
+    }
+});
+
+
+//Autocomplete (Phuong)
 let handlerData = new Promise((resolve, reject) => {
     document.addEventListener('DOMContentLoaded',() => {
         // Listen for changes in authentication state
@@ -164,7 +203,7 @@ let handlerData = new Promise((resolve, reject) => {
 
 let Fmode;
 
-// Data for each location container
+// Data for each location container (Phuong)
 async function displayData(){
     try {
         // Clear existing place containers
@@ -317,7 +356,7 @@ async function displayData(){
 
 displayData();
 
-// Function to delete a location by name
+// Function to delete a location by name (Phuong)
 function deleteLocationByName(userId, locationName) {
     const userLocationRef = ref(database, 'users/' + userId + '/location');
 
