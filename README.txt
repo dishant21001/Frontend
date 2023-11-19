@@ -30,15 +30,15 @@ git clone https://github.com/MM0199/Weather-Brainiac.git
     password: 123456
 
 5. **Accessing Favorite Page:**
-- After logging in, return to the [index.html](index.html) and click on the "Favorite" link to access the UI for the user's saved locations.
+- After logging in, return to the [Homepage](index.html) and click on the "Favorite" link to access the UI for the user's saved locations.
 
 6. **Enjoy exploring the WeatherBrainiac App!**
 
-7. **Each team member and the test cases they worked on, along with the files regarding them, are listed below:**
+7. **Each team member's contribution:**
 
 Dishant:
 Rithik:
 Huy:
-Phuong:
+Phuong: index.html, login.html, register.html, reset.html, favorite.html, favorite.css, favorite.js, firebseConfig.js, home.css, login.css, register.css, script.js.
 Jonathan:
 Gabrielle: 
