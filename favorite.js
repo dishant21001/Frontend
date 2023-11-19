@@ -1,5 +1,43 @@
 import { auth, database, onAuthStateChanged, ref, push, onValue, get, remove } from "./firebaseConfig.js";
 
+// Hide content initially when the page is loaded
+document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('header').style.display = 'none';
+    document.getElementById('search').style.display = 'none';
+    window.onload = function() {
+        // Show loading overlay
+        document.getElementById('loadingOverlay').style.display = 'flex';
+    
+        // Simulate a longer loading time (adjust the duration as needed)
+        setTimeout(function() {
+            // Hide loading overlay after the simulated loading time
+            document.getElementById('loadingOverlay').style.display = 'none';
+        }, 2000); // 1000 milliseconds (1 seconds) - Adjust the duration as needed
+    
+        const body = document.body;
+    
+        // Check if 'dark-mode' class is in localStorage
+        if (localStorage.getItem('darkMode') === 'true') {
+            body.classList.add('dark-mode');
+            body.classList.remove('light-mode');
+            //console.log("enable")
+        } else {
+            body.classList.add('light-mode');
+            body.classList.remove('dark-mode');
+            //console.log("disable")
+        }
+    
+        // Check if 'Fmode' is true
+        if(localStorage.getItem('Fmode') === 'true') {
+            Fmode = true;
+        } else {
+            Fmode = false;
+        } 
+        document.getElementById('header').style.display = 'flex';
+        document.getElementById('search').style.display = 'flex';
+    }
+});
+
 //Autocomplete
 let handlerData = new Promise((resolve, reject) => {
     document.addEventListener('DOMContentLoaded',() => {
@@ -18,7 +56,7 @@ let handlerData = new Promise((resolve, reject) => {
                 const autocomplete = new google.maps.places.Autocomplete(input, options);
         
                 autocomplete.addListener("place_changed", async () => {
-                    const place = autocomplete.getPlace().name;
+                    const place = autocomplete.getPlace().name.toLowerCase();
                 
                     // Reference to the user's location node
                     const locationRef = ref(database, 'users/' + userId + '/location');
@@ -132,6 +170,7 @@ async function displayData(){
         // Clear existing place containers
         const dynamicContainer = document.getElementById('dynamic-container');
         dynamicContainer.innerHTML = '';
+
         const weatherData = Object.values(await handlerData);    
 
             weatherData.forEach(data => {
@@ -254,7 +293,7 @@ async function displayData(){
                 precipitationContainer.appendChild(precipitation);
 
                 const deleteIcon = document.createElement('img');
-                deleteIcon.id = data.locationName.trim();
+                deleteIcon.id = data.locationName.trim().toLowerCase();
                 deleteIcon.addEventListener('click', function() {
                     deleteLocationByName(auth.currentUser.uid, this.id);
                 });
@@ -271,11 +310,9 @@ async function displayData(){
                 placeDesc.appendChild(deleteIcon);
                 dynamicContainer.appendChild(placeContainer);
             });
-
     } catch (error) {
         console.log(error);
     }
-
 }
 
 displayData();
@@ -300,7 +337,6 @@ function deleteLocationByName(userId, locationName) {
           
                 // Reference to the specific location to be deleted
                 const locationRef = ref(database, 'users/' + userId + '/location/' + locationKey);
-                console.log(locationRef);
 
                 // Remove the location
                 remove(locationRef)
@@ -323,24 +359,4 @@ function deleteLocationByName(userId, locationName) {
     .catch((error) => {
         console.error('Error querying location:', error);
     });
-  }
-
-  window.onload = function() {
-    const body = document.body;
-    
-    // Check if 'dark-mode' class is in localStorage
-    if (localStorage.getItem('darkMode') === 'true') {
-      body.classList.add('dark-mode');
-      console.log("enable")
-    } else {
-      body.classList.remove('dark-mode');
-      console.log("disable")
-    }
-
-    // Check if 'Fmode' is true
-    if(localStorage.getItem('Fmode') === 'true') {
-        Fmode = true;
-    } else {
-        Fmode = false;
-    } 
   }

@@ -8,20 +8,23 @@
 </head>
 <body>
 
+    <!-- Loading overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-spinner"></div>
+    </div>
+
     <!-- App bar -->
-    <div class="header">
+    <div class="header" id="header">
         <a href="index.html" class="logo"> <img src="Images/LOGO1.png" alt=""> </a>
     </div>
 
-    <div class="search-bar">
+    <div class="search-bar" id="search">
         <img src="https://cdn-icons-png.flaticon.com/128/954/954591.png"/>
         <input id="search-input" type="text" placeholder="Enter city name..."/>
         <img id="add-btn" src="https://cdn-icons-png.flaticon.com/128/833/833472.png"/>
     </div>
 
-    <div class="container" id="dynamic-container">
-
-    </div>
+    <div class="container" id="dynamic-container"></div>
 
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDH3MTTgijLG7d5Q4t6nrpEuJnFMrL3ips&libraries=places" defer>
     </script>
