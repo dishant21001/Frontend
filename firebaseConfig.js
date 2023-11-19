@@ -1,3 +1,6 @@
+// all names regarding code completion are in README.txt file 
+// as most files are collaborative
+
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.6.0/firebase-app.js";
 import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut, createUserWithEmailAndPassword, sendEmailVerification, sendPasswordResetEmail, updateProfile } from "https://www.gstatic.com/firebasejs/10.6.0/firebase-auth.js";
 import { getDatabase, ref, push, onValue, get, set, orderByChild, query, equalTo, remove  } from "https://www.gstatic.com/firebasejs/10.6.0/firebase-database.js";

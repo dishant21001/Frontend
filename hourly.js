@@ -1,3 +1,6 @@
+// all names regarding code completion are in README.txt file 
+// as most files are collaborative
+
 //Autocomplete for search bar
 document.addEventListener('DOMContentLoaded', () => {
     const input = document.getElementById('search-input');
