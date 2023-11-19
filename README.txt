@@ -34,7 +34,7 @@ git clone https://github.com/MM0199/Weather-Brainiac.git
 
 6. **Enjoy exploring the WeatherBrainiac App!**
 
-7. __Each team member and the test cases they worked on, along with the files regarding them, are listed below:__
+7. **Each team member and the test cases they worked on, along with the files regarding them, are listed below:**
 
 Dishant:
 Rithik:
