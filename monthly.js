@@ -123,6 +123,8 @@ function fetchMonthlyWeatherData(month, year, callback) {
 }
 
  window.onload = function() { 
+    setDefaultDate();
+    populateCalendar();
     const body = document.body;
     
     // Check if 'dark-mode' class is in localStorage(Huy)
