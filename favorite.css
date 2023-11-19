@@ -1,4 +1,6 @@
-/* Phuong */
+/* all names regarding code completion are in README.txt file 
+    as most files are collaborative*/
+
 body
 {
     font-family: Arial, sans-serif;
@@ -238,7 +240,6 @@ body
 }
 .dark-mode .header{
     background-color: rgba(1, 55, 127, 0.5);
-    
 }
 
 .light-mode {

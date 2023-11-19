@@ -1,3 +1,6 @@
+/* all names regarding code completion are in README.txt file 
+    as most files are collaborative*/
+
 body, html {
     margin: 0;
     padding: 0;
@@ -179,12 +182,17 @@ body, html {
 
 .dark-mode
 {
-  
+
     background-image: url(./Images/nightSky.jpeg);
-    
 }
 .dark-mode .header{
     background-color: rgba(1, 55, 127, 0.5);
     
-  }
+}
+
+.dark-mode button{
+    color: lightgreen;
+    background-color: rgba(77, 125, 100, 0.926);
+    
+}
 

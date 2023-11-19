@@ -1,3 +1,6 @@
+<!--all names regarding code completion are in README.txt file 
+    as most files are collaborative-->
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -11,9 +14,13 @@
 </head>
 
 <body style="background-color:rgba(123, 185, 208, 0.514);">
+    <div class="header">
+        <a href="index.html" class="logo"> <img src="Images/LOGO1.png" alt=""> </a>
+    </div>
     <header>
         <h1>About Weather Brainiac</h1>
     </header>
+
 
     <section>
         <h2>Our Mission</h2>
@@ -60,6 +67,33 @@
             h1 {color:rgb(39, 150, 122); text-align: center;}
             p {color:green}
             body{ color: rgb(54, 162, 153);}
+
+            .header{
+                overflow: hidden;
+                background-size: 100%;
+                background-position: center;
+                background-repeat:no-repeat;
+                height: 80px;
+                width: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                padding-top: 0;
+            }
+
+            .header .logo{
+                height: 100%;
+                display: flex;
+                align-items: center;
+            }
+
+            .logo img{
+                height: 70%;
+                width: 100%;
+                border-radius: 20px;
+            }
+
+
             
         </style>
 

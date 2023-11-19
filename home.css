@@ -54,7 +54,7 @@
 
 /* Add this to your CSS file */
 .dark-mode {
-  background-color: #121212; /* Dark background color */
+  background-color: #373636bd; /* Dark background color */
   color: white; /* Light text color for contrast */
 }
 
@@ -104,7 +104,30 @@ body.dark-mode {
 }
 
 .dark-mode .forecast-day{
-  background-color: #121212; /* Dark background */
+  background-color: #373636bd; /* Dark background */
+  color: #ccc; /* Lighter text color for dark background */
+}
+
+.dark-mode .chart-container {
+  background-color: #373636e4; /* Dark background */
+  color: white;
+}
+
+.dark-mode .detail-item{
+  background-color: #373636bd; /* Dark background */
+  color: #ccc; /* Lighter text color for dark background */
+}
+
+.dark-mode .detail-item h3{
+  color: #ccc; /* Lighter text color for dark background */
+}
+
+.dark-mode .detail-item p{
+  color: #ccc; /* Lighter text color for dark background */
+}
+
+.dark-mode .news-item{
+  background-color: #373636bd; /* Dark background */
   color: #ccc; /* Lighter text color for dark background */
 }
 
@@ -114,27 +137,27 @@ body.dark-mode {
 
 .dark-mode .feedback-btn{
   color: white;
-  border-color: cyan;
+  border-color: rgb(52, 144, 236);
 }
 
 .dark-mode .maps-btn{
   color: white;
-  border-color: cyan;
+  border-color: rgb(52, 144, 236);
 }
 
 .dark-mode .feedback-btn{
   color: white;
-  border-color: cyan;
+  border-color: rgb(52, 144, 236);
 }
 
 .dark-mode .subheading-btn{
   color: white;
-  border-color: cyan;
+  border-color: rgb(52, 144, 236);
 }
 
 .dark-mode .monthlyForecast-btn{
   color: white;
-  border-color: cyan;
+  border-color: rgb(52, 144, 236);
 }
 
 
@@ -482,7 +505,7 @@ section {
   padding: 16px;
   border: 2px solid #007BFF; 
   border-radius: 20px;
-  background-color: rgba(255, 255, 255, 0.8);
+  background-color: rgba(255, 255, 255, 0.672);
 
 }
 
@@ -505,7 +528,7 @@ section {
   flex-wrap: wrap;
   gap: 1rem;
   justify-content: space-between;
-  overflow-x: auto; /* Horizontal scroll if the content exceeds the container width */
+  overflow-y: auto; /* Vertical scroll if the content exceeds the container width */
 }
 
 .forecast-day h3 {
@@ -562,7 +585,8 @@ section {
 }
 
 .detail-item {
-  background-color: rgba(255, 255, 255, 0.3); /* Slight white transparency */;
+  /*background-color: rgba(255, 255, 255, 0.3); /* Slight white transparency */
+  background-color: #f8f9fa;
   padding: 10px;
   border-radius: 20px;
   text-align: center;
@@ -605,6 +629,7 @@ section {
   flex: 1;
   padding: 15px;
   border: 1px solid #1845e7; /* Light grey border */
+  background-color: #f8f9fa;
   border-radius: 20px;
 }
 
@@ -612,7 +637,7 @@ section {
   display: block;
   margin-top: 10px;
   font-size: 16px;
-  color: #888; /* Dark grey color for the date */
+  color: #5e5c5c; /* Dark grey color for the date */
 }
 
 

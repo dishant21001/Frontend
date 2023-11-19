@@ -1,3 +1,6 @@
+// all names regarding code completion are in README.txt file 
+// as most files are collaborative
+
 // Utility function to get the number of days in a month
 function getDaysInMonth(month, year) {
     return new Date(year, month, 0).getDate();
@@ -120,6 +123,8 @@ function fetchMonthlyWeatherData(month, year, callback) {
 }
 
  window.onload = function() { 
+    setDefaultDate();
+    populateCalendar();
     const body = document.body;
     
     // Check if 'dark-mode' class is in localStorage(Huy)

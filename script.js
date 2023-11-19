@@ -1,3 +1,6 @@
+// all names regarding code completion are in README.txt file 
+// as most files are collaborative
+
 let navbar = document.querySelector('.navbar');
 
 document.querySelector('#menu-btn').onclick = () =>{
@@ -293,7 +296,7 @@ function fetch7DayForecast(location) {
         forecastDayElem.innerHTML = `
           <h3>${new Date(day.date).toLocaleDateString('en-US', { weekday: 'long' })}</h3>
           <p>High: ${isFmode ? day.day.maxtemp_f : day.day.maxtemp_c}°${isFmode ? 'F' : 'C'}</p>
-          <p>Low: ${isFmode ? day.day.mintemp_f : day.day.mintemp_c}°${isFmode ? 'F' : 'C'}</p>//Huy
+          <p>Low: ${isFmode ? day.day.mintemp_f : day.day.mintemp_c}°${isFmode ? 'F' : 'C'}</p>
           <p>Condition: ${day.day.condition.text}</p>
         `;
         forecastGrid.appendChild(forecastDayElem);

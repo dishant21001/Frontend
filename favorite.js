@@ -1,3 +1,6 @@
+// all names regarding code completion are in README.txt file 
+// as most files are collaborative
+
 import { auth, database, onAuthStateChanged, ref, push, onValue, get, remove } from "./firebaseConfig.js";
 
 // Hide content initially when the page is loaded (Phuong)
