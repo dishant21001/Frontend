@@ -19,9 +19,22 @@ window.onscroll = () => {
   searchForm.classList.remove('active');
 }
 
+// Show loading overlay
+document.getElementById('loadingOverlay').style.display = 'flex';
+document.getElementById('header').style.display = 'none';
+
+// Simulate a longer loading time (adjust the duration as needed)
+setTimeout(function() {
+    // Hide loading overlay after the simulated loading time
+    document.getElementById('loadingOverlay').style.display = 'none';
+
+    // Show the actual page content
+    document.getElementById('header').style.display = 'flex';
+}, 2000); // 3000 milliseconds (3 seconds) - Adjust the duration as needed
 
 // Add this inside your script tag or a JavaScript file
  // When the page loads, check if the user has a saved preference and apply it
+ let isFmode;
  window.onload = function() {
   const body = document.body;
   
@@ -31,8 +44,23 @@ window.onscroll = () => {
   } else {
     body.classList.remove('dark-mode');
   }
+
+  // Check if 'Fmode' is true
+  if(localStorage.getItem('Fmode') === 'true') {
+    isFmode = true;
+  } else {
+    isFmode = false;
+  } 
+  console.log("Fmode: " + localStorage.getItem('Fmode'));
+  let tempBtn = document.getElementById("tempUnit");
+  tempBtn.innerHTML =`${isFmode ? "°F" : "°C"}`;
+  tempBtn.addEventListener("click", () => toggleUnit());
+  // Initial call to fetch weather for a default location
+  fetchCurrentWeather('Dallas');
+  fetchForecast('Dallas');
+  fetch7DayForecast('Dallas');
+  fetchDataAndUpdateChart('Dallas');
 }
-console.log(localStorage.getItem('darkMode'))
 
 // Function to toggle dark mode
 function toggleDarkMode() {
@@ -67,26 +95,21 @@ if (document.getElementById('dark-mode-toggle')) {
 }
 
 
-
-
  //Convert Celius to F button
- let tempBtn = document.getElementById("tempUnit");
- let isFmode = false;
- subLocation = 'dallas'
- const toggleUnit = (subLocation) => {
+ const toggleUnit = () => {
    // Write your code to manipulate the DOM here
-    isFmode = !isFmode; //toggle
-     if (isFmode) 
-     {
-          tempBtn.innerHTML ="°F " ;
-          
-     } 
-     else {
-          tempBtn.innerHTML = "°C";
-          
-     }
-    fetch7DayForecast(subLocation); //update 
-    fetchCurrentWeather(subLocation);
+
+    isFmode = !isFmode;
+    if (isFmode) 
+    {
+        localStorage.setItem('Fmode', 'true');
+        console.log("Fmode: " + localStorage.getItem('Fmode'));
+    } 
+    else {
+        localStorage.setItem('Fmode', 'false');
+        console.log("Fmode: " + localStorage.getItem('Fmode'));
+    }
+    location.reload();
     //We need to update the chart temp
     /*data.forecast.forecastday[0].hour.map(hour => isFmode ? hour.temp_c : hour.temp_f);
     // Update the label in the chart
@@ -104,65 +127,16 @@ if (document.getElementById('dark-mode-toggle')) {
       
   }
 });
- tempBtn.addEventListener("click", () => toggleUnit(subLocation));
-
-
-
 
 
 document.addEventListener("DOMContentLoaded", function() {
-  var ctx = document.getElementById('hourlyForecastChart').getContext('2d');
-  var chart = new Chart(ctx, {
-      type: 'line',
-      data: {
-          labels: ["00:00", "1:00", "2:00", "3:00", "4:00", "5:00", "6:00", "7:00", "08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00",
-                   "17:00", "18:00", "19:00", "20:00", "21:00", "22:00", "23:00"], // The hours
-          datasets: [{
-              label: 'Temperature (°C)',
-              data: [], // Initialize empty data array
-              backgroundColor: 'rgba(255, 99, 132, 0.2)',
-              borderColor: 'rgba(255, 99, 132, 1)',
-              borderWidth: 1
-          }]
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        scales: {
-            y: {
-                beginAtZero: true
-            }
-        }
-      }
-  });
-
-  // Function to fetch data and update the chart
-  function fetchDataAndUpdateChart(location) {
-    const apiKey = '2c4fe195f69547fda56145444230211';
-    const url = `https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${location}&hours=24`;
-
-    try {
-      fetch(url)
-      .then(response => response.json())
-      .then(data => {
-        forecastData = data.forecast.forecastday[0].hour.map(hour =>  hour.temp_c);
-        chart.data.datasets[0].data = forecastData;
-        chart.update();
-      });
-    } catch (error) {
-      console.error("Error fetching real-time data: ", error);
-      throw error; // Rethrow the error to be caught by the calling function
-    }
-  }
-
     //Autocomplete search
     const input = document.getElementById('search-box');
     const options = {
-        types: ['(cities)'],
-        fields: ["formatted_address", "geometry", "name"],
-        strictBounds: false,
-        };
-
+      types: ['(cities)'],
+      fields: ["formatted_address", "geometry", "name"],
+      strictBounds: false,
+      };
     const autocomplete = new google.maps.places.Autocomplete(input, options);
 
     autocomplete.addListener("place_changed", () => {
@@ -170,10 +144,7 @@ document.addEventListener("DOMContentLoaded", function() {
         fetchCurrentWeather(place);
         fetchDataAndUpdateChart(place);
         fetch7DayForecast(place);
-        fetchCurrentWeather(place);
     });
-
-  fetchDataAndUpdateChart('Dallas');
 
   // Set interval to fetch data every 60000 milliseconds (1 minute)
   setInterval(fetchDataAndUpdateChart(location), 60000);
@@ -202,6 +173,60 @@ new Swiper('.forecast-grid', {
 
 
 // script.js
+
+var chart;
+// Function to fetch data and update the chart
+function fetchDataAndUpdateChart(location) {
+  const apiKey = '2c4fe195f69547fda56145444230211';
+  const url = `https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${location}&hours=24`;
+
+  var ctx = document.getElementById('hourlyForecastChart').getContext('2d');
+  if(chart){
+    chart.destroy();
+  }
+  chart = new Chart(ctx, {
+      type: 'line',
+      data: {
+          labels: ["00:00", "1:00", "2:00", "3:00", "4:00", "5:00", "6:00", "7:00", "08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00",
+                   "17:00", "18:00", "19:00", "20:00", "21:00", "22:00", "23:00"], // The hours
+          datasets: [{
+              label: `${isFmode ? "Temperature (°F)" : "Temperature (°C)"}`,
+              data: [], // Initialize empty data array
+              backgroundColor: 'rgba(255, 99, 132, 0.2)',
+              borderColor: 'rgba(255, 99, 132, 1)',
+              borderWidth: 1
+          }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
+      }
+  });
+
+  try {
+    fetch(url)
+    .then(response => response.json())
+    .then(data => {
+      if(isFmode){
+        forecastData = data.forecast.forecastday[0].hour.map(hour =>  hour.temp_f);
+      } else {
+        forecastData = data.forecast.forecastday[0].hour.map(hour =>  hour.temp_c);
+      }
+
+      chart.data.datasets[0].data = forecastData;
+      chart.update();
+    });
+  } catch (error) {
+    console.error("Error fetching real-time data: ", error);
+    throw error; // Rethrow the error to be caught by the calling function
+  }
+}
+
 
 // Function to fetch current weather
 function fetchCurrentWeather(location) {
@@ -247,13 +272,6 @@ function fetchForecast(location) {
       console.error('Error fetching forecast data:', error);
     });
 }
-
-
-
-// Initial call to fetch weather for a default location
-fetchCurrentWeather('Dallas');
-fetchForecast('Dallas');
-
 
 
 

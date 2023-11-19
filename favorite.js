@@ -65,7 +65,8 @@ let handlerData = new Promise((resolve, reject) => {
                                 const data = await response.json();
                                 // Extract relevant weather information from the API response
                                 const locationName = data.location.name;
-                                const currentTemp = data.current.temp_f;
+                                const currentTempF = data.current.temp_f;
+                                const currentTempC = data.current.temp_c;
                                 const windSpeed = data.current.wind_kph;
                                 const humidity = data.current.humidity;
                                 const sunrise = data.forecast.forecastday[0].astro.sunrise;
@@ -87,7 +88,8 @@ let handlerData = new Promise((resolve, reject) => {
                                 // Store the information in the weatherInformation object
                                 weatherInformation[city] = {
                                     locationName,
-                                    currentTemp,
+                                    currentTempC,
+                                    currentTempF,
                                     windSpeed,
                                     humidity,
                                     sunrise,
@@ -122,6 +124,7 @@ let handlerData = new Promise((resolve, reject) => {
     });
 });
 
+let Fmode;
 
 // Data for each location container
 async function displayData(){
@@ -144,7 +147,12 @@ async function displayData(){
                 place.textContent = data.locationName;
 
                 const currentTemp = document.createElement('h3');
-                currentTemp.textContent = data.currentTemp + "°F";
+                // Check if 'Fmode' class is true
+                    if(Fmode === true) {
+                        currentTemp.textContent = data.currentTempF + "°F";
+                    } else {
+                        currentTemp.textContent = data.currentTempC + "°C";
+                    }      
 
                 descContainer.appendChild(place);
                 descContainer.appendChild(currentTemp);
@@ -328,4 +336,11 @@ function deleteLocationByName(userId, locationName) {
       body.classList.remove('dark-mode');
       console.log("disable")
     }
+
+    // Check if 'Fmode' is true
+    if(localStorage.getItem('Fmode') === 'true') {
+        Fmode = true;
+    } else {
+        Fmode = false;
+    } 
   }
