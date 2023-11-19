@@ -36,7 +36,7 @@ git clone https://github.com/MM0199/Weather-Brainiac.git
 
 7. **Each team member's contribution:**
 
-Dishant:
+Dishant: index.html, home.css, script.js, hourly.html, hourly.css, hourly.js, monthly.html, monthly.css, monthly.js, maps,html, maps.css, maps.js, feedback.html, feedback.css, newletter.html.
 Rithik:
 Huy:
 Phuong: index.html, login.html, register.html, reset.html, favorite.html, favorite.css, favorite.js, firebseConfig.js, home.css, login.css, register.css, script.js.
