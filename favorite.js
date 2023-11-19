@@ -1,43 +1,5 @@
 import { auth, database, onAuthStateChanged, ref, push, onValue, get, remove } from "./firebaseConfig.js";
 
-// Hide content initially when the page is loaded
-document.addEventListener('DOMContentLoaded', function() {
-    document.getElementById('header').style.display = 'none';
-    document.getElementById('search').style.display = 'none';
-    window.onload = function() {
-        // Show loading overlay
-        document.getElementById('loadingOverlay').style.display = 'flex';
-    
-        // Simulate a longer loading time (adjust the duration as needed)
-        setTimeout(function() {
-            // Hide loading overlay after the simulated loading time
-            document.getElementById('loadingOverlay').style.display = 'none';
-        }, 2000); // 1000 milliseconds (1 seconds) - Adjust the duration as needed
-    
-        const body = document.body;
-    
-        // Check if 'dark-mode' class is in localStorage
-        if (localStorage.getItem('darkMode') === 'true') {
-            body.classList.add('dark-mode');
-            body.classList.remove('light-mode');
-            //console.log("enable")
-        } else {
-            body.classList.add('light-mode');
-            body.classList.remove('dark-mode');
-            //console.log("disable")
-        }
-    
-        // Check if 'Fmode' is true
-        if(localStorage.getItem('Fmode') === 'true') {
-            Fmode = true;
-        } else {
-            Fmode = false;
-        } 
-        document.getElementById('header').style.display = 'flex';
-        document.getElementById('search').style.display = 'flex';
-    }
-});
-
 // Hide content initially when the page is loaded (Phuong)
 document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('header').style.display = 'none';
@@ -74,10 +36,49 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('header').style.display = 'flex';
         document.getElementById('search').style.display = 'flex';
     }
+//Autocomplete (Phuong)
+    const input = document.getElementById('search-input');
+    const options = {
+        types: ['(cities)'],
+        fields: ["formatted_address", "geometry", "name"],
+        strictBounds: false,
+    };
+    const autocomplete = new google.maps.places.Autocomplete(input, options);
+
+    autocomplete.addListener("place_changed", async () => {
+        const place = autocomplete.getPlace().name.toLowerCase();
+    
+        // Reference to the user's location node
+        const locationRef = ref(database, 'users/' + auth.currentUser.uid + '/location');
+    
+        // Check if the location already exists
+        get(locationRef)
+            .then((snapshot) => {
+                const existingLocations = snapshot.val();
+    
+                if (existingLocations && Object.values(existingLocations).includes(place)) {
+                    console.log('Location already exists for this user.');
+                } else {
+                    // Add the new location to the user's locations
+                    push(locationRef, place)
+                        .then(() => {
+                            console.log('Location added successfully');
+                            location.reload();
+                        })
+                        .catch((error) => {
+                            console.log('Error adding location:', error);
+                        });
+                }
+            })
+            .catch((error) => {
+                console.log('Error checking existing locations:', error);
+                resolve(weatherInformation);
+            });
+    });
 });
 
+let Fmode;
 
-//Autocomplete (Phuong)
 let handlerData = new Promise((resolve, reject) => {
     document.addEventListener('DOMContentLoaded',() => {
         // Listen for changes in authentication state
@@ -85,45 +86,6 @@ let handlerData = new Promise((resolve, reject) => {
             let locationValues;
             if (user) {
                 const userId = user.uid;
-
-                const input = document.getElementById('search-input');
-                        const options = {
-                            types: ['(cities)'],
-                            fields: ["formatted_address", "geometry", "name"],
-                            strictBounds: false,
-                        };
-                const autocomplete = new google.maps.places.Autocomplete(input, options);
-        
-                autocomplete.addListener("place_changed", async () => {
-                    const place = autocomplete.getPlace().name.toLowerCase();
-                
-                    // Reference to the user's location node
-                    const locationRef = ref(database, 'users/' + userId + '/location');
-                
-                    // Check if the location already exists
-                    get(locationRef)
-                        .then((snapshot) => {
-                            const existingLocations = snapshot.val();
-                
-                            if (existingLocations && Object.values(existingLocations).includes(place)) {
-                                console.log('Location already exists for this user.');
-                            } else {
-                                // Add the new location to the user's locations
-                                push(locationRef, place)
-                                    .then(() => {
-                                        console.log('Location added successfully');
-                                        location.reload();
-                                    })
-                                    .catch((error) => {
-                                        console.log('Error adding location:', error);
-                                    });
-                            }
-                        })
-                        .catch((error) => {
-                            console.log('Error checking existing locations:', error);
-                            resolve(weatherInformation);
-                        });
-                });
 
                 // Retrieve location from Firebase
                 onValue(ref(database, 'users/'+ userId + '/location'), (snapshot) => {
@@ -142,6 +104,7 @@ let handlerData = new Promise((resolve, reject) => {
                                 const data = await response.json();
                                 // Extract relevant weather information from the API response
                                 const locationName = data.location.name;
+                                const locationID = city;
                                 const currentTempF = data.current.temp_f;
                                 const currentTempC = data.current.temp_c;
                                 const windSpeed = data.current.wind_kph;
@@ -165,6 +128,7 @@ let handlerData = new Promise((resolve, reject) => {
                                 // Store the information in the weatherInformation object
                                 weatherInformation[city] = {
                                     locationName,
+                                    locationID,
                                     currentTempC,
                                     currentTempF,
                                     windSpeed,
@@ -201,7 +165,6 @@ let handlerData = new Promise((resolve, reject) => {
     });
 });
 
-let Fmode;
 
 // Data for each location container (Phuong)
 async function displayData(){
@@ -215,6 +178,7 @@ async function displayData(){
             weatherData.forEach(data => {
                 let placeContainer = document.createElement('div');
                 placeContainer.classList.add('place-container');
+                placeContainer.id =  data.locationID.trim().toLowerCase() + 'container';
                 let placeDesc = document.createElement('div');
                 placeDesc.classList.add('place-desc');
 
@@ -332,9 +296,26 @@ async function displayData(){
                 precipitationContainer.appendChild(precipitation);
 
                 const deleteIcon = document.createElement('img');
-                deleteIcon.id = data.locationName.trim().toLowerCase();
-                deleteIcon.addEventListener('click', function() {
-                    deleteLocationByName(auth.currentUser.uid, this.id);
+                deleteIcon.id = data.locationID.trim().toLowerCase();
+                deleteIcon.addEventListener('click', async function() {
+                    // Usage of deleteLocationByName with try-catch to handle errors
+                    try {
+                        await deleteLocationByName(auth.currentUser.uid, this.id);
+                        document.getElementById('loading-inner-Overlay').style.display = 'flex';
+                        document.getElementById('dynamic-container').style.display = 'none';
+                        document.getElementById(this.id + 'container').style.display = 'none';
+
+                        // Simulate a longer loading time (adjust the duration as needed)
+                        setTimeout(function() {
+                            // Hide loading overlay after the simulated loading time
+                            document.getElementById('loading-inner-Overlay').style.display = 'none';
+                            document.getElementById('dynamic-container').style.display = 'block';
+                        }, 1000); // 1000 milliseconds (1 seconds) - Adjust the duration as needed
+                        
+                    } catch (error) {
+                        // Handle the error if needed
+                        console.error('Error deleting location:', error);
+                    }
                 });
                 deleteIcon.src = "https://cdn-icons-png.flaticon.com/128/1828/1828843.png";
         
@@ -357,45 +338,38 @@ async function displayData(){
 displayData();
 
 // Function to delete a location by name (Phuong)
-function deleteLocationByName(userId, locationName) {
+async function deleteLocationByName(userId, locationName) {
     const userLocationRef = ref(database, 'users/' + userId + '/location');
 
-    // Check if the location exists
-    get(userLocationRef)
-    .then((snapshot) => {
+    try {
+        // Check if the location exists
+        const snapshot = await get(userLocationRef);
         const locationsExists = snapshot.val();
-        console.log(locationsExists);
+
         if (locationsExists) {
             // Find the key based on the locationName
             const locationKey = Object.keys(locationsExists).find(
-              key => locationsExists[key] === locationName
+                key => locationsExists[key] === locationName
             );
-          
+
             if (locationKey) {
-              console.log('Location key found:', locationKey);
-          
+                console.log('Location key found:', locationKey);
+
                 // Reference to the specific location to be deleted
                 const locationRef = ref(database, 'users/' + userId + '/location/' + locationKey);
 
                 // Remove the location
-                remove(locationRef)
-                .then(() => {
-                    console.log('Location deleted successfully');
-                    location.reload();
-                })
-                .catch((error) => {
-                    console.error('Error deleting location:', error);
-                });
+                await remove(locationRef);
+
+                console.log('Location deleted successfully');
             } else {
-              console.log('Location not found for deletion');
+                console.log('Location not found for deletion');
             }
-          } else {
+        } else {
             console.log('No locations found');
-          }
-
-
-    })
-    .catch((error) => {
-        console.error('Error querying location:', error);
-    });
-  }
+        }
+    } catch (error) {
+        console.error('Error deleting location:', error);
+        throw error; // Rethrow the error
+    }
+}
