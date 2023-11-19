@@ -30,7 +30,7 @@ setTimeout(function() {
 
     // Show the actual page content
     document.getElementById('header').style.display = 'flex';
-}, 2000); // 3000 milliseconds (3 seconds) - Adjust the duration as needed
+}, 1000); // 1000 milliseconds (1 seconds) - Adjust the duration as needed
 
 // Add this inside your script tag or a JavaScript file
  // When the page loads, check if the user has a saved preference and apply it
