@@ -5,8 +5,9 @@ This Weather App provides various features to display weather data, including a 
 
 ## Instructions
 
+
 1. **Clone the Repository:**
-git clone https://github.com/MM0199/Weather-Brainiac.git
+git clone https://github.com/dishant21001/Weather-Brainiac
 
 2. **Run the Application:**
 - Open the `index.html` file in a web browser to access the homepage UI.
@@ -42,3 +43,7 @@ Dishant: index.html, home.css, script.js, hourly.html, hourly.css, hourly.js, mo
 <br>Phuong: index.html, login.html, register.html, reset.html, favorite.html, favorite.css, favorite.js, firebaseConfig.js, home.css, login.css, register.css, script.js.
 <br>Jonathan: index.html, Historical.html/css, Tips.html/css, FAQ.html/CSS, Status.html/CSS
 <br>Gabrielle: index.html, favorite.css, favorite.js, favorite.html, contact.css, contact.html, feedback.css, feedback.html, home.css
+
+
+FYI: For 7 day forecast our free trial might have ended so the data visible would be of 3 day forecast. But for 
+     Demo we will make sure that the 7 day forecast works. since the free trail is about(15 days).
