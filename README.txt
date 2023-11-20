@@ -40,5 +40,5 @@ Dishant: index.html, home.css, script.js, hourly.html, hourly.css, hourly.js, mo
 Rithik: index.html, home.css, monthly.html, monthly.css, monthly.js, about_us.html, services.html, newsletter.html
 Huy: index.html, home.css, script.js, hourly.css, hourly.js, monthly.js, monthly.css, feedback.css, favorite.css, favorite.js
 Phuong: index.html, login.html, register.html, reset.html, favorite.html, favorite.css, favorite.js, firebaseConfig.js, home.css, login.css, register.css, script.js.
-Jonathan:
+Jonathan: index.html, Historical.html/css, Tips.html/css, FAQ.html/CSS, Status.html/CSS
 Gabrielle: 
