@@ -40,11 +40,16 @@ git clone https://github.com/dishant21001/Weather-Brainiac
 8. **Each team member's contribution:**
 
 Dishant: index.html, home.css, script.js, hourly.html, hourly.css, hourly.js, monthly.html, monthly.css, monthly.js, maps.html, maps.css, maps.js, feedback.html, feedback.css, newletter.html, favorite.html, favorite.css, favorite.js.
-<br>Rithik: index.html, home.css, monthly.html, monthly.css, monthly.js, about_us.html, services.html, newsletter.html
-<br>Huy: index.html, home.css, script.js, hourly.css, hourly.js, monthly.js, monthly.css, feedback.css, favorite.css, favorite.js
-<br>Phuong: index.html, login.html, register.html, reset.html, favorite.html, favorite.css, favorite.js, firebaseConfig.js, home.css, login.css, register.css, script.js.
-<br>Jonathan: index.html, Historical.html/css, Tips.html/css, FAQ.html/CSS, Status.html/CSS
-<br>Gabrielle: index.html, favorite.css, favorite.js, favorite.html, contact.css, contact.html, feedback.css, feedback.html, home.css
+
+Rithik: index.html, home.css, monthly.html, monthly.css, monthly.js, about_us.html, services.html, newsletter.html
+
+Huy: index.html, home.css, script.js, hourly.css, hourly.js, monthly.js, monthly.css, feedback.css, favorite.css, favorite.js
+
+Phuong: index.html, login.html, register.html, reset.html, favorite.html, favorite.css, favorite.js, firebaseConfig.js, home.css, login.css, register.css, script.js.
+
+Jonathan: index.html, Historical.html/css, Tips.html/css, FAQ.html/CSS, Status.html/CSS
+
+Gabrielle: index.html, favorite.css, favorite.js, favorite.html, contact.css, contact.html, feedback.css, feedback.html, home.css
 
 
 FYI: For 7 day forecast our free trial might have ended so the data visible would be of 3 day forecast. But for 
