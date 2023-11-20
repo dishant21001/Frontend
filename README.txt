@@ -34,7 +34,9 @@ git clone https://github.com/MM0199/Weather-Brainiac.git
 
 6. **Enjoy exploring the WeatherBrainiac App!**
 
-7. **Each team member's contribution:**
+7. **Note: Our free trail for access to the API might have ended. If this is the case at the time of your viewing, instead of the 7 day forecast, only 3 days of the forecast is visible. During demo we will have the 7 day forecast after renewing our access.
+
+8. **Each team member's contribution:**
 
 Dishant: index.html, home.css, script.js, hourly.html, hourly.css, hourly.js, monthly.html, monthly.css, monthly.js, maps.html, maps.css, maps.js, feedback.html, feedback.css, newletter.html, favorite.html, favorite.css, favorite.js.
 <br>Rithik: index.html, home.css, monthly.html, monthly.css, monthly.js, about_us.html, services.html, newsletter.html
