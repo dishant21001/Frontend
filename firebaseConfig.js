@@ -4,6 +4,8 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.6.0/firebase-app.js";
 import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut, createUserWithEmailAndPassword, sendEmailVerification, sendPasswordResetEmail, updateProfile } from "https://www.gstatic.com/firebasejs/10.6.0/firebase-auth.js";
 import { getDatabase, ref, push, onValue, get, set, orderByChild, query, equalTo, remove  } from "https://www.gstatic.com/firebasejs/10.6.0/firebase-database.js";
+import { getFunctions, httpsCallable  } from "https://www.gstatic.com/firebasejs/10.6.0/firebase-functions.js";
+
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -24,8 +26,9 @@ measurementId: "G-1JLB0DJ69R"
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const database = getDatabase(app);
+const functions = getFunctions(app);
 
-export { app, auth, database, signInWithEmailAndPassword ,onAuthStateChanged, ref,
+export { app, auth, database, functions, httpsCallable, signInWithEmailAndPassword ,onAuthStateChanged, ref,
     set, push, onValue, get, signOut, createUserWithEmailAndPassword, sendEmailVerification,
     updateProfile, orderByChild, query, equalTo, remove, sendPasswordResetEmail
-   };
+};
