@@ -335,7 +335,7 @@
             } else if (user && !user.emailVerified) {
                 // User is logged in but email is not verified
                 signOut(auth)
-                console.log("User is logged in but email is not verified.");
+                alert("Email is not verified. You have been log out.");
             } else {
                 // User is not logged in
                 console.log("User is not logged in.");
