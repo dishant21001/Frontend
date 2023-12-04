@@ -56,21 +56,40 @@ document.addEventListener('DOMContentLoaded', function() {
     
         // Check if the location already exists
         get(locationRef)
-            .then((snapshot) => {
+            .then(async (snapshot) => {
                 const existingLocations = snapshot.val();
     
                 if (existingLocations && Object.values(existingLocations).includes(place)) {
                     console.log('Location already exists for this user.');
                 } else {
                     // Add the new location to the user's locations
-                    push(locationRef, place)
-                        .then(() => {
-                            console.log('Location added successfully');
-                            location.reload();
-                        })
-                        .catch((error) => {
-                            console.log('Error adding location:', error);
-                        });
+                    try {
+                        console.log(`Places: ${place}`);
+                        const apiKey = '9964b127235b4341b4423310232608';
+                        const url = `https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${place}&hours=24&aqi=yes`;
+                        
+                        const response = await fetch(url);
+                    
+                        if (!response.ok) {
+                            // Check if the response status is not in the range of 200-299
+                            throw new Error(`Failed to fetch data. Status: ${response.status}`);
+                        }
+                    
+                        const data = await response.json();
+                        
+                        // Continue with your logic for a successful response
+                        push(locationRef, place)
+                            .then(() => {
+                                console.log('Location added successfully');
+                                location.reload();
+                            })
+                            .catch((error) => {
+                                console.log('Error adding location:', error);
+                            });
+                    } catch (error) {
+                        // Handle errors, including HTTP errors
+                        alert(`${place} does not exist.`);
+                    }                    
                 }
             })
             .catch((error) => {
@@ -98,10 +117,10 @@ let handlerData = new Promise((resolve, reject) => {
                         // Extract just the values (locations) from the object
                         locationValues = Object.values(locations);
     
-                        const apiKey = '2c4fe195f69547fda56145444230211';
+                        const apiKey = '9964b127235b4341b4423310232608';
                         const weatherInformation = [];
                         const fetchPromises = locationValues.map(async city => {
-                            const url = `https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${city}&hours=24&aqi=yes`;
+                        const url = `https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${city}&hours=24&aqi=yes`;
                             try {
                                 const response = await fetch(url);
                                 const data = await response.json();
@@ -142,7 +161,7 @@ let handlerData = new Promise((resolve, reject) => {
                                     precipitation,
                                 };
                             } catch (error) {
-                                console.error(`Error fetching data for ${city}:`, error);
+                                console.log(`Error fetching data for ${city}.`);
                             }
                         });
 
