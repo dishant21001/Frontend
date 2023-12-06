@@ -72,3 +72,4 @@ const homeButton = document.getElementById('home-button');
         // Option 2: Suggest the user to close the tab
         // alert("Please close this tab to return to your home screen.");
     });
+
