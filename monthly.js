@@ -102,7 +102,7 @@ window.onload = function() {
 
 
 function fetchMonthlyWeatherData(month, year, callback) {
-    const apiKey = '2c4fe195f69547fda56145444230211'; // Replace with your API key
+    const apiKey = '653c0f0a19e94fc2939161403230412'; // Replace with your API key
     const url = `http://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=YOUR_LOCATION&dt=${year}-${month}-01&days=30`; // Adjust the query parameters as needed
 
     fetch(url)

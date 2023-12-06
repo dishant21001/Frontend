@@ -98,7 +98,7 @@ let handlerData = new Promise((resolve, reject) => {
                         // Extract just the values (locations) from the object
                         locationValues = Object.values(locations);
     
-                        const apiKey = '2c4fe195f69547fda56145444230211';
+                        const apiKey = '653c0f0a19e94fc2939161403230412';
                         const weatherInformation = [];
                         const fetchPromises = locationValues.map(async city => {
                             const url = `https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${city}&hours=24&aqi=yes`;

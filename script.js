@@ -179,7 +179,7 @@ new Swiper('.forecast-grid', {
 var chart;
 // Function to fetch data and update the chart
 function fetchDataAndUpdateChart(location) {
-  const apiKey = '2c4fe195f69547fda56145444230211';
+  const apiKey = '653c0f0a19e94fc2939161403230412';
   const url = `https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${location}&hours=24`;
 
   var ctx = document.getElementById('hourlyForecastChart').getContext('2d');
@@ -232,7 +232,7 @@ function fetchDataAndUpdateChart(location) {
 
 // Function to fetch current weather
 function fetchCurrentWeather(location) {
-  const apiKey = '2c4fe195f69547fda56145444230211';
+  const apiKey = '653c0f0a19e94fc2939161403230412';
   const url = `https://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${location}&aqi=no`;
 
   fetch(url)
@@ -259,7 +259,7 @@ function fetchCurrentWeather(location) {
 
 // Function to fetch forecast
 function fetchForecast(location) {
-  const apiKey = '2c4fe195f69547fda56145444230211';
+  const apiKey = '653c0f0a19e94fc2939161403230412';
   const url = `https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${location}&days=7&aqi=no&alerts=no`;
 
   fetch(url)
@@ -281,7 +281,7 @@ function fetchForecast(location) {
 
 // Function to fetch and display the 7-day forecast in Cmode
 function fetch7DayForecast(location) {
-  const apiKey = '2c4fe195f69547fda56145444230211';
+  const apiKey = '653c0f0a19e94fc2939161403230412';
   const url = `http://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${location}&days=7&aqi=no&alerts=no`;
 
   fetch(url)
@@ -321,7 +321,7 @@ document.querySelector('#search-box').addEventListener('keypress', function(e) {
 
 
 
-const apiKey = '2c4fe195f69547fda56145444230211';
+const apiKey = '653c0f0a19e94fc2939161403230412';
 let mymap = L.map('mapid').setView([37.8, -96], 4); // Adjust the view to center on the US
 
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -428,7 +428,7 @@ document.querySelector('.search-form').addEventListener('submit', function(event
 // Function to fetch and display the sunrise and sunset times
 function displaySunriseSunset() {
   // API Key should ideally not be hardcoded in production, but for the sake of this example, we'll include it here
-  const apiKey = '2c4fe195f69547fda56145444230211';
+  const apiKey = '653c0f0a19e94fc2939161403230412';
 
   // Function to get the current date in YYYY-MM-DD format
   function getCurrentDate() {

@@ -1,7 +1,7 @@
 // all names regarding code completion are in README.txt file 
 // as most files are collaborative
 
-const apiKey = '2c4fe195f69547fda56145444230211';
+const apiKey = '653c0f0a19e94fc2939161403230412';
 let mymap = L.map('mapid').setView([37.8, -96], 4); // Adjust the view to center on the US
 
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {

@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // This function fetches weather data for the specified location
 function fetchWeatherData(location) {
-    const apiKey = '2c4fe195f69547fda56145444230211'; // API Key provided
+    const apiKey = '653c0f0a19e94fc2939161403230412'; // API Key provided
     const url = `https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${location}&hours=24`;
 
     fetch(url)
